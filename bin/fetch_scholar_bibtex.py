@@ -77,6 +77,15 @@ def update_bibtex():
                 doi_match = re.search(r'(10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+)', filled_pub['pub_url'])
                 if doi_match:
                     filled_pub['bib']['doi'] = doi_match.group(1)
+                elif 'pubs.rsc.org' in filled_pub['pub_url']:
+                    # Special handling for RSC: https://pubs.rsc.org/.../d4dd00352g
+                    # DOI is usually 10.1039/SUFFIX
+                    parts = filled_pub['pub_url'].split('/')
+                    if parts:
+                        suffix = parts[-1]
+                        # Verify suffix looks like a DOI suffix (alphanumeric)
+                        if re.match(r'^[a-zA-Z0-9]+$', suffix):
+                             filled_pub['bib']['doi'] = f"10.1039/{suffix.upper()}"
             
             # 3. Enable buttons/badges
             filled_pub['bib']['bibtex_show'] = 'true'
