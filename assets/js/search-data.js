@@ -522,7 +522,7 @@ ninja.data = [{
         title: 'LinkedIn',
         section: 'Socials',
         handler: () => {
-          window.open("https://www.linkedin.com/in/https://www.linkedin.com/in/alex-sole-gomez/", "_blank");
+          window.open("https://www.linkedin.com/in/alex-sole-gomez", "_blank");
         },
       },{
         id: 'social-orcid',
@@ -536,7 +536,7 @@ ninja.data = [{
         title: 'ResearchGate',
         section: 'Socials',
         handler: () => {
-          window.open("https://www.researchgate.net/profile/www.researchgate.net/profile/Alex-Sole-4?ev=hdr_xprf&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoiaG9tZSIsInBvc2l0aW9uIjoiZ2xvYmFsSGVhZGVyIn19/", "_blank");
+          window.open("https://www.researchgate.net/profile/www.researchgate.net/profile/Alex-Sole-4/", "_blank");
         },
       },{
         id: 'social-scholar',
