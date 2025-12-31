@@ -138,16 +138,37 @@ def update_bibtex():
                 if k in filled_pub['bib']:
                     del filled_pub['bib'][k]
 
+            # Enforce standardized author name
+            if 'author' in filled_pub['bib']:
+                filled_pub['bib']['author'] = filled_pub['bib']['author'].replace("Àlex Solé Gómez", "Àlex Solé") \
+                                                                         .replace("Jaume Alexandre Solé Gómez", "Àlex Solé") \
+                                                                         .replace("Alex Sole", "Àlex Solé") # Catch simple ASCII too just in case
+
             # Generate abbreviation (abbr)
             # Try 'journal' first, then 'conference', then 'publisher'
             venue = filled_pub['bib'].get('journal') or filled_pub['bib'].get('conference') or filled_pub['bib'].get('publisher')
-            if venue:
+            
+            # Manual Abbreviation Overrides (to match user preference)
+            title_lower = filled_pub['bib'].get('title', '').lower()
+            if "thermal ellipsoid estimation" in title_lower:
+                filled_pub['bib']['abbr'] = "DD"
+            elif "hyperfine coupling in molecular qubits" in title_lower:
+                filled_pub['bib']['abbr'] = "CS"
+            elif "prism: periodic representation" in title_lower:
+                filled_pub['bib']['abbr'] = "arXiv"
+            elif "intrusion detection in software-defined networks" in title_lower:
+                filled_pub['bib']['abbr'] = "IICMLCN"
+            elif "river debris detection" in title_lower:
+                filled_pub['bib']['abbr'] = "IJAEOG"
+            elif "polyglonet" in title_lower:
+                filled_pub['bib']['abbr'] = "ICIAP"
+            elif "garbage and debris identification" in title_lower or "parameters estimation from remote sensing" in title_lower:
+                filled_pub['bib']['abbr'] = "UPC"
+            elif venue and 'abbr' not in filled_pub['bib']:
                 if 'arxiv' in venue.lower():
                     filled_pub['bib']['abbr'] = 'arXiv'
                 else:
                     # Simple heuristic: First letter of each word that is uppercase
-                    # e.g. "International Journal of Applied..." -> "IJAE..."
-                    # Or just take first letters of words starting with capital.
                     words = venue.split()
                     abbr = "".join([w[0] for w in words if w and w[0].isupper()])
                     if abbr:

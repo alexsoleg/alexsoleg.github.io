@@ -7,3 +7,26 @@
 
 "Vision":
   color: "#009f36"
+
+"DD":
+  color: "#e63946"
+
+"CS":
+  color: "#457b9d"
+
+"arXiv":
+  color: "#d62828"
+  url: https://arxiv.org
+
+"IICMLCN":
+  color: "#1d3557"
+
+"IJAEOG":
+  color: "#2a9d8f"
+
+"ICIAP":
+  color: "#e76f51"
+
+"UPC":
+  color: "#264653"
+  url: https://www.upc.edu
