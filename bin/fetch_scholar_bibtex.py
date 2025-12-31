@@ -44,6 +44,15 @@ def update_bibtex():
     bibtex_entries = []
     print(f"Found {len(author['publications'])} publications. Processing...")
 
+    # Sort publications by year descending
+    def get_year(pub):
+        try:
+            return int(pub['bib'].get('pub_year', 0))
+        except:
+            return 0
+    
+    author["publications"].sort(key=get_year, reverse=True)
+
     for pub in author["publications"]:
         try:
             # We need to fill the publication to get the bibtex
@@ -61,9 +70,13 @@ def update_bibtex():
                 filled_pub['bib']['html'] = filled_pub['pub_url']
             
             # 2. DOI: scholarly sometimes has it, or we might extract it from pub_url if it is a doi link
-            # But scholarly 'bib' might not have it. Let's check.
-            # If not in bib, we can't easily get it without another lookup, but we can try to guess or leave empty.
-            # Many times 'pub_url' is the DOI link.
+            if 'doi' not in filled_pub['bib'] and 'pub_url' in filled_pub:
+                # Try to extract DOI from URL (e.g. https://doi.org/10.1016/j.jag.2021.102682)
+                # or https://.../10.1016/...
+                import re
+                doi_match = re.search(r'(10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+)', filled_pub['pub_url'])
+                if doi_match:
+                    filled_pub['bib']['doi'] = doi_match.group(1)
             
             # 3. Enable buttons/badges
             filled_pub['bib']['bibtex_show'] = 'true'
@@ -97,6 +110,21 @@ def update_bibtex():
             for k in keys_to_remove:
                 if k in filled_pub['bib']:
                     del filled_pub['bib'][k]
+
+            # Generate abbreviation (abbr)
+            # Try 'journal' first, then 'conference', then 'publisher'
+            venue = filled_pub['bib'].get('journal') or filled_pub['bib'].get('conference') or filled_pub['bib'].get('publisher')
+            if venue:
+                # Simple heuristic: First letter of each word that is uppercase
+                # e.g. "International Journal of Applied..." -> "IJAE..."
+                # Or just take first letters of words starting with capital.
+                words = venue.split()
+                abbr = "".join([w[0] for w in words if w and w[0].isupper()])
+                if abbr:
+                     # Limit length just in case it gets too long
+                     if len(abbr) > 10:
+                        abbr = abbr[:10]
+                     filled_pub['bib']['abbr'] = abbr
 
             # Now try to generate bibtex
             bib = scholarly.bibtex(filled_pub)
