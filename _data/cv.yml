@@ -4,9 +4,9 @@
     - name: Full Name
       value: Àlex Solé
     - name: Date of Birth
-      value: 14th March 1879
+      value: 2nd May 1996
     - name: Languages
-      value: English, German
+      value: Catalan, Spanish, English
 
 - title: Education
   type: time_table
