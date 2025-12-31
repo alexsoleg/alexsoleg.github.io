@@ -529,7 +529,7 @@ ninja.data = [{
         title: 'ResearchGate',
         section: 'Socials',
         handler: () => {
-          window.open("https://www.researchgate.net/profile/www.researchgate.net/profile/Alex-Sole-4/", "_blank");
+          window.open("https://www.researchgate.net/profile/Alex-Sole-4/", "_blank");
         },
       },{
         id: 'social-scholar',
