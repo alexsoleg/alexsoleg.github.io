@@ -196,6 +196,40 @@ def update_bibtex():
     except Exception as e:
         print(f"Error writing to {output_file}: {e}")
         sys.exit(1)
+        
+    # Also update _data/citations.yml
+    # Structure:
+    # papers:
+    #   SCHOLAR_ID:PUB_ID:
+    #     citations: N
+    #     title: ...
+    #     year: ...
+    
+    citations_data = {"metadata": {"last_updated": datetime.now().strftime("%Y-%m-%d")}, "papers": {}}
+    
+    for pub in author["publications"]:
+         pub_id = pub.get("author_pub_id")
+         if not pub_id: continue
+         
+         # Ensure we use the full ID format if missing
+         if ':' not in pub_id:
+             full_id = f"{scholar_id}:{pub_id}"
+         else:
+             full_id = pub_id
+             
+         citations_data["papers"][full_id] = {
+             "citations": pub.get("num_citations", 0),
+             "title": pub.get("bib", {}).get("title", ""),
+             "year": pub.get("bib", {}).get("pub_year", "Unknown")
+         }
+         
+    citations_file = "_data/citations.yml"
+    try:
+        with open(citations_file, "w") as f:
+             yaml.dump(citations_data, f)
+        print(f"Successfully updated {citations_file}")
+    except Exception as e:
+        print(f"Error writing to {citations_file}: {e}")
 
 if __name__ == "__main__":
     update_bibtex()
