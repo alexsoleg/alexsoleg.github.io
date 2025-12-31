@@ -87,10 +87,28 @@ def update_bibtex():
                         if re.match(r'^[a-zA-Z0-9]+$', suffix):
                              filled_pub['bib']['doi'] = f"10.1039/{suffix.upper()}"
             
+            # Manual overrides for known missing DOIs
+            title_lower = filled_pub['bib'].get('title', '').lower()
+            if "river debris detection" in title_lower and 'doi' not in filled_pub['bib']:
+                 filled_pub['bib']['doi'] = "10.1016/j.jag.2022.102682"
+            
+            if "intrusion detection in software-defined networks" in title_lower and 'doi' not in filled_pub['bib']:
+                 filled_pub['bib']['doi'] = "10.1109/ICMLCN64995.2025.11140473"
+            
+            if "prism: periodic representation with multiscale" in title_lower and 'doi' not in filled_pub['bib']:
+                 filled_pub['bib']['doi'] = "10.21203/rs.3.rs-7828855/v1"
+
             # 3. Enable buttons/badges
             filled_pub['bib']['bibtex_show'] = 'true'
             filled_pub['bib']['altmetric'] = 'true'
             filled_pub['bib']['dimensions'] = 'true'
+            
+            # Disable badges for specific papers as requested
+            title_lower = filled_pub['bib'].get('title', '').lower()
+            if "garbage and debris identification" in title_lower or \
+               "parameters estimation from remote sensing" in title_lower:
+                filled_pub['bib']['altmetric'] = 'false'
+                filled_pub['bib']['dimensions'] = 'false'
             # google_scholar_id is needed for the badge. It seems it is 'author_pub_id' or 'cites_id' component?
             # looking at bib.liquid: entry.google_scholar_id
             # and it constructs url: user=USERID&citation_for_view=USERID:ENTRY_ID
@@ -124,16 +142,19 @@ def update_bibtex():
             # Try 'journal' first, then 'conference', then 'publisher'
             venue = filled_pub['bib'].get('journal') or filled_pub['bib'].get('conference') or filled_pub['bib'].get('publisher')
             if venue:
-                # Simple heuristic: First letter of each word that is uppercase
-                # e.g. "International Journal of Applied..." -> "IJAE..."
-                # Or just take first letters of words starting with capital.
-                words = venue.split()
-                abbr = "".join([w[0] for w in words if w and w[0].isupper()])
-                if abbr:
-                     # Limit length just in case it gets too long
-                     if len(abbr) > 10:
-                        abbr = abbr[:10]
-                     filled_pub['bib']['abbr'] = abbr
+                if 'arxiv' in venue.lower():
+                    filled_pub['bib']['abbr'] = 'arXiv'
+                else:
+                    # Simple heuristic: First letter of each word that is uppercase
+                    # e.g. "International Journal of Applied..." -> "IJAE..."
+                    # Or just take first letters of words starting with capital.
+                    words = venue.split()
+                    abbr = "".join([w[0] for w in words if w and w[0].isupper()])
+                    if abbr:
+                        # Limit length just in case it gets too long
+                        if len(abbr) > 10:
+                            abbr = abbr[:10]
+                        filled_pub['bib']['abbr'] = abbr
 
             # Now try to generate bibtex
             bib = scholarly.bibtex(filled_pub)
