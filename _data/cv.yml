@@ -10,12 +10,13 @@
       "city": "Barcelona",
       "countryCode": "ES",
       "region": "Catalonia"
-    },
+    }
   },
   "languages": [
     { "language": "Catalan", "fluency": "Native" },
     { "language": "Spanish", "fluency": "Native" },
-    { "language": "English", "fluency": "Professional" },
+    { "language": "English", "fluency": "Professional" }
+  ],
   "work": [
     {
       "name": "UPC - ETSETB TelecomBCN",
