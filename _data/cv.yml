@@ -1,97 +1,191 @@
-- title: General Information
-  type: map
-  contents:
-    - name: Full Name
-      value: Àlex Solé
-    - name: Date of Birth
-      value: 2nd May 1996
-    - name: Languages
-      value: Catalan, Spanish, English
-
-- title: Education
-  type: time_table
-  contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
-      description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
-      description:
-        - Description 1.
-        - Description 2.
-
-- title: Experience
-  type: time_table
-  contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
-      description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
-      description:
-        - Description 1.
-        - Description 2.
-
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
-      description:
-
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
-
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 1921
-      items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
-
-- title: Academic Interests
-  type: nested_list
-  contents:
-    - title: Topic 1.
-      items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
-      items:
-        - Description 1.
-        - Description 2.
-
-- title: Other Interests
-  type: list
-  contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+{
+  "$schema": "https://jsonresume.org/schema",
+  "basics": {
+    "name": "Àlex Solé Gómez",
+    "label": "PhD Candidate in Machine Learning",
+    "email": "alexsoleg@gmail.com",
+    "birthDate": "1996-05-02",
+    "summary": "PhD candidate at Universitat Politècnica de Catalunya (UPC) working on deep learning for molecular and crystalline systems, with prior experience in computer vision, graph neural networks, and remote sensing.",
+    "location": {
+      "city": "Barcelona",
+      "countryCode": "ES",
+      "region": "Catalonia"
+    }
+  },
+  "languages": [
+    { "language": "Catalan", "fluency": "Native" },
+    { "language": "Spanish", "fluency": "Native" },
+    { "language": "English", "fluency": "Professional" }
+  ],
+  "work": [
+    {
+      "name": "Institute of Theoretical and Computational Chemistry, Universitat de Barcelona (IQTCUB)",
+      "position": "Research Technician",
+      "location": "Barcelona, Spain",
+      "startDate": "2023-05-05",
+      "endDate": "2024-11-30",
+      "highlights": [
+        "Developed graph neural networks for property prediction in crystal structures within the AIQUANEURO project.",
+        "Work supervised by Eliseo Ruiz."
+      ]
+    },
+    {
+      "name": "Istituto Italiano di Tecnologia (IIT)",
+      "position": "Research Fellow (Computer Vision)",
+      "location": "Genoa, Italy",
+      "startDate": "2022-07-01",
+      "endDate": "2022-12-31",
+      "highlights": [
+        "Few-shot image retrieval constrained by knowledge graphs for image geolocalisation (MEMEX-EU project).",
+        "Supervised by Prof. Alessio Del Bue and Asst. Prof. Stuart James."
+      ]
+    },
+    {
+      "name": "Vicomtech",
+      "position": "Research Assistant (Computer Vision)",
+      "location": "Donostia–San Sebastián, Spain",
+      "startDate": "2021-01-15",
+      "endDate": "2022-06-30",
+      "highlights": [
+        "Worked on European (AIDA, GRACE, Border UAS) and internal projects.",
+        "Researched scene text detection/recognition, person detection, body-part segmentation, person Re-ID, NER for geolocation from text, federated learning, and data visualization.",
+        "Supervised by Prof. Oihana Otaegui and collaborators."
+      ]
+    },
+    {
+      "name": "TECH Technological University",
+      "position": "Teacher (Computer Vision)",
+      "location": "Remote, Spain",
+      "startDate": "2022-04-01",
+      "endDate": "2022-07-31",
+      "highlights": [
+        "Contributed to development of a Master's program in Computer Vision.",
+        "Covered backbones and detection/tracking of people."
+      ]
+    },
+    {
+      "name": "Delft University of Technology (TU Delft)",
+      "position": "Research Assistant (Scholarship, Computer Vision)",
+      "location": "Delft, The Netherlands",
+      "startDate": "2020-11-01",
+      "endDate": "2022-01-29",
+      "highlights": [
+        "Created a dataset and developed deep learning strategies to detect marine and river pollution using Sentinel-2 satellite data.",
+        "Supervised by Prof. Elmar Eisemann and Dr. Leonardo Scandolo."
+      ]
+    },
+    {
+      "name": "Pervasive Technologies",
+      "position": "Machine Learning Engineer",
+      "location": "Barcelona, Spain",
+      "startDate": "2018-11-01",
+      "endDate": "2019-09-15",
+      "highlights": [
+        "Built and cleaned datasets based on client requirements.",
+        "Wrote Python/Bash/Docker scripts for training in Google Cloud Platform and created client-facing APIs."
+      ]
+    },
+    {
+      "name": "Dispromedia",
+      "position": "iOS App Developer",
+      "location": "Tàrrega, Spain",
+      "startDate": "2017-06-15",
+      "endDate": "2017-09-15",
+      "highlights": [
+        "Scraped client websites to automatically generate dynamic mobile apps based on extracted information."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universitat Politècnica de Catalunya (UPC)",
+      "area": "Deep Learning / Machine Learning for Molecular Systems",
+      "studyType": "PhD Candidate",
+      "startDate": "2023-01-01",
+      "endDate": "",
+      "location": "Barcelona, Spain",
+      "courses": [
+        "Supervised by Prof. Javier Ruiz-Hidalgo and Prof. Eliseo Ruiz."
+      ]
+    },
+    {
+      "institution": "Universitat Politècnica de Catalunya (UPC)",
+      "area": "Telecommunication Engineering (Audiovisual Systems major)",
+      "studyType": "MSc",
+      "startDate": "2018-01-01",
+      "endDate": "2020-12-31",
+      "location": "Barcelona, Spain",
+      "courses": [
+        "Machine Learning, Computer Vision, Image and Sound Processing, Signal Theory."
+      ]
+    },
+    {
+      "institution": "Delft University of Technology (TU Delft)",
+      "area": "Erasmus Programme / MSc Thesis Exchange",
+      "studyType": "Exchange",
+      "startDate": "2020-03-01",
+      "endDate": "2020-11-01",
+      "location": "Delft, The Netherlands",
+      "courses": [
+        "Thesis: \"A learning approach for garbage and debris identification\" (supervised by Prof. Elmar Eisemann and Prof. Javier Ruiz-Hidalgo)."
+      ]
+    },
+    {
+      "institution": "Universitat Politècnica de Catalunya (UPC)",
+      "area": "Telecommunications Technologies and Services Engineering",
+      "studyType": "BSc",
+      "startDate": "2014-01-01",
+      "endDate": "2018-12-31",
+      "location": "Barcelona, Spain",
+      "courses": [
+        "Machine Learning, Computer Vision, Image and Sound Processing, Signal Theory."
+      ]
+    },
+    {
+      "institution": "Télécom ParisTech",
+      "area": "Erasmus Programme / BSc Thesis Exchange",
+      "studyType": "Exchange",
+      "startDate": "2018-03-01",
+      "endDate": "2018-08-01",
+      "location": "Paris, France",
+      "courses": [
+        "Thesis: \"Parameters estimation from remote sensing data for the generation of virtual 3D city models\" (supervised by Prof. Michel Roux and Prof. Philippe Salembier)."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Machine Learning & Deep Learning",
+      "keywords": ["PyTorch", "JAX", "TensorFlow", "Scikit-learn", "Representation learning", "Graph Neural Networks"]
+    },
+    {
+      "name": "Software Engineering & Tooling",
+      "keywords": ["Python", "Bash", "Docker", "Git", "APIs", "High-Performance Computing (HPC)"]
+    },
+    {
+      "name": "Data & Scientific Computing",
+      "keywords": ["Pandas", "NumPy", "Matlab", "LaTeX"]
+    },
+    {
+      "name": "Computer Vision",
+      "keywords": ["OpenCV", "Detection & tracking", "Scene text recognition", "Remote sensing", "3D point cloud processing", "Optical Character Recognition (OCR)"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "CartNet",
+      "description": "Graph neural network architecture for crystal property prediction using Cartesian-aware encoding; includes an online demo and reproducible code.",
+      "url": "https://www.ee.ub.edu/cartnet"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Research",
+      "keywords": ["Computer Vision", "Graph Neural Networks", "Deep Learning for Molecular Systems", "Crystal structure property prediction"]
+    },
+    {
+      "name": "Creative & Community",
+      "keywords": ["Cinema", "Visual effects (VFX)", "Photography", "Festival organization (Lo Memefest)"]
+    }
+  ]
+}
