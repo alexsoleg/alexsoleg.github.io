@@ -31,4 +31,3 @@ I am pursuing a PhD at the Image Processing Group, UPC, under the supervision of
 Previously, I was a Research Fellow at Istituto Italiano di Tecnologia, a Research Assistant at Vicomtech, and a Research Assistant at TU Delft.
 
 I obtained my MSc in Telecommunications Engineering (2020) and a BSc in Telecommunications Technologies and Services Engineering (2018) at Universitat Politècnica de Catalunya. During my studies, I also completed stays at Télécom ParisTech, TU Delft, and Université du Luxembourg.
-

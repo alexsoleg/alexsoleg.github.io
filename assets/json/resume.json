@@ -89,19 +89,14 @@
       "location": "Remote, Spain",
       "startDate": "2022-04-01",
       "endDate": "2022-07-31",
-      "highlights": [
-        "Contributed to development of a Master's program in Computer Vision.",
-        "Covered backbones and detection/tracking of people."
-      ]
+      "highlights": ["Contributed to development of a Master's program in Computer Vision.", "Covered backbones and detection/tracking of people."]
     },
     {
       "name": "TECH Technological University",
       "position": "Lecturer in Computer Vision",
       "startDate": "2021-04-01",
       "endDate": "2021-07-01",
-      "highlights": [
-        "Contributed to the Master's program in Computer Vision (backbones; detection and tracking of people)."
-      ]
+      "highlights": ["Contributed to the Master's program in Computer Vision (backbones; detection and tracking of people)."]
     },
     {
       "name": "Delft University of Technology (TU Delft)",
@@ -131,9 +126,7 @@
       "location": "Tàrrega, Spain",
       "startDate": "2017-06-15",
       "endDate": "2017-09-15",
-      "highlights": [
-        "Scraped client websites to automatically generate dynamic mobile apps based on extracted information."
-      ]
+      "highlights": ["Scraped client websites to automatically generate dynamic mobile apps based on extracted information."]
     }
   ],
   "education": [
@@ -143,9 +136,7 @@
       "studyType": "PhD Candidate",
       "startDate": "2023-04-01",
       "location": "Barcelona, Spain",
-      "courses": [
-        "Supervised by Prof. Javier Ruiz-Hidalgo and Prof. Eliseo Ruiz."
-      ]
+      "courses": ["Supervised by Prof. Javier Ruiz-Hidalgo and Prof. Eliseo Ruiz."]
     },
     {
       "institution": "University of Luxembourg",
@@ -162,9 +153,7 @@
       "startDate": "2018-01-01",
       "endDate": "2020-12-31",
       "location": "Barcelona, Spain",
-      "courses": [
-        "Machine Learning, Computer Vision, Image and Sound Processing, Signal Theory."
-      ]
+      "courses": ["Machine Learning, Computer Vision, Image and Sound Processing, Signal Theory."]
     },
     {
       "institution": "Delft University of Technology (TU Delft)",
@@ -184,9 +173,7 @@
       "startDate": "2014-01-01",
       "endDate": "2018-12-31",
       "location": "Barcelona, Spain",
-      "courses": [
-        "Machine Learning, Computer Vision, Image and Sound Processing, Signal Theory."
-      ]
+      "courses": ["Machine Learning, Computer Vision, Image and Sound Processing, Signal Theory."]
     },
     {
       "institution": "Télécom ParisTech",
@@ -203,45 +190,19 @@
   "skills": [
     {
       "name": "Machine Learning & Deep Learning",
-      "keywords": [
-        "PyTorch",
-        "JAX",
-        "TensorFlow",
-        "Scikit-learn",
-        "Representation learning",
-        "Graph Neural Networks"
-      ]
+      "keywords": ["PyTorch", "JAX", "TensorFlow", "Scikit-learn", "Representation learning", "Graph Neural Networks"]
     },
     {
       "name": "Software Engineering & Tooling",
-      "keywords": [
-        "Python",
-        "Bash",
-        "Docker",
-        "Git",
-        "APIs",
-        "High-Performance Computing (HPC)"
-      ]
+      "keywords": ["Python", "Bash", "Docker", "Git", "APIs", "High-Performance Computing (HPC)"]
     },
     {
       "name": "Data & Scientific Computing",
-      "keywords": [
-        "Pandas",
-        "NumPy",
-        "SciPy",
-        "Matlab",
-        "LaTeX"
-      ]
+      "keywords": ["Pandas", "NumPy", "SciPy", "Matlab", "LaTeX"]
     },
     {
       "name": "Computer Vision",
-      "keywords": [
-        "OpenCV",
-        "Detection & tracking",
-        "Scene text recognition",
-        "Remote sensing",
-        "3D point cloud processing"
-      ]
+      "keywords": ["OpenCV", "Detection & tracking", "Scene text recognition", "Remote sensing", "3D point cloud processing"]
     }
   ],
   "awards": [
@@ -259,21 +220,11 @@
   "interests": [
     {
       "name": "Research",
-      "keywords": [
-        "Computer Vision",
-        "Graph Neural Networks",
-        "Deep Learning for Molecular Systems",
-        "Crystal structure property prediction"
-      ]
+      "keywords": ["Computer Vision", "Graph Neural Networks", "Deep Learning for Molecular Systems", "Crystal structure property prediction"]
     },
     {
       "name": "Creative & Community",
-      "keywords": [
-        "Cinema",
-        "Visual effects (VFX)",
-        "Photography",
-        "Festival organization (Lo Memefest)"
-      ]
+      "keywords": ["Cinema", "Visual effects (VFX)", "Photography", "Festival organization (Lo Memefest)"]
     }
   ],
   "publications": [
