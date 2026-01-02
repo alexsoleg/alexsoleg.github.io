@@ -6,7 +6,7 @@ subtitle: "PhD Candidate in Deep Learning"
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: prof_pic.png
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Universitat Politècnica de Catalunya (UPC)</p>
