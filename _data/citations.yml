@@ -1,40 +1,35 @@
 metadata:
-  last_updated: '2025-12-31'
+  last_updated: '2026-01-02'
 papers:
   Da_TlhIAAAAJ:2osOgNQ5qMEC:
     citations: 0
-    title: Leveraging Quantum Machine Learning for Intrusion Detection in Software-Defined
-      Networks
-    year: 2025
+    title: Leveraging Quantum Machine Learning for Intrusion Detection in Software-Defined Networks
+    year: '2025'
   Da_TlhIAAAAJ:9yKSN-GCB0IC:
     citations: 6
-    title: 'A Cartesian encoding graph neural network for crystal structure property
-      prediction: application to thermal ellipsoid estimation'
-    year: 2025
+    title: 'A Cartesian encoding graph neural network for crystal structure property prediction: application to thermal ellipsoid estimation'
+    year: '2025'
   Da_TlhIAAAAJ:IjCSPb-OGe4C:
     citations: 0
     title: A learning approach for garbage and debris identification
-    year: 2020
+    year: '2020'
   Da_TlhIAAAAJ:UeHWp8X0CEIC:
     citations: 0
-    title: Parameters estimation from remote sensing data for the generation of virtual
-      3D city models
-    year: 2018
+    title: Parameters estimation from remote sensing data for the generation of virtual 3D city models
+    year: '2018'
   Da_TlhIAAAAJ:Y0pCki6q_DkC:
     citations: 0
-    title: 'PRISM: Periodic Representation with multIscale and Similarity graph Modelling
-      for enhanced crystal structure property prediction'
-    year: 2025
+    title: 'PRISM: Periodic Representation with multIscale and Similarity graph Modelling for enhanced crystal structure property prediction'
+    year: '2025'
   Da_TlhIAAAAJ:qjMakFHDy7sC:
     citations: 2
     title: Exploring hyperfine coupling in molecular qubits
-    year: 2025
+    year: '2025'
   Da_TlhIAAAAJ:u-x6o8ySG0sC:
     citations: 2
-    title: 'PolygloNet: Multilingual Approach for Scene Text Recognition Without Language
-      Constraints'
-    year: 2022
+    title: 'PolygloNet: Multilingual Approach for Scene Text Recognition Without Language Constraints'
+    year: '2022'
   Da_TlhIAAAAJ:u5HHmVD_uO8C:
     citations: 39
     title: A learning approach for river debris detection
-    year: 2022
+    year: '2022'
