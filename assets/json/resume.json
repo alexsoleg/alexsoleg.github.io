@@ -206,14 +206,14 @@
   ],
   "awards": [
     {
-      "name": "Honors in Calculus",
-      "description": "Received honors in Calculus at UPC."
+      "title": "Honors in Calculus",
+      "summary": "Received honors in Calculus at UPC."
     }
   ],
   "projects": [
     {
       "name": "CartNet",
-      "description": "Graph neural network architecture for crystal property prediction using Cartesian-aware encoding; includes an online demo and reproducible code.",
+      "summary": "Graph neural network architecture for crystal property prediction using Cartesian-aware encoding; includes an online demo and reproducible code.",
       "url": "https://www.ee.ub.edu/cartnet"
     }
   ],
