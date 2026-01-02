@@ -2,15 +2,14 @@
 layout: about
 title: about
 permalink: /
-subtitle: "PhD Candidate in Deep Learning"
+subtitle: "PhD Candidate in Deep Learning @ Universitat Politècnica de Catalunya (UPC)"
 
 profile:
   align: right
   image: prof_pic.png
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>Universitat Politècnica de Catalunya (UPC)</p>
-    <p>Barcelona, Spain</p>
+  # more_info: >
+
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
