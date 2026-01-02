@@ -44,9 +44,9 @@ ninja.data = [{
           section: "News",},{id: "news-we-published-a-new-preprint-prism-periodic-representation-with-multiscale-and-similarity-graph-modelling-for-enhanced-crystal-structure-property-prediction",
           title: 'We published a new preprint: PRISM: Periodic Representation with multIscale and Similarity graph...',
           description: "",
-          section: "News",},{id: "projects-project-1",
-          title: 'project 1',
-          description: "with background image",
+          section: "News",},{id: "projects-cartnet",
+          title: 'CartNet',
+          description: "CartNet Project",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{id: "projects-project-2",
