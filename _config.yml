@@ -199,6 +199,11 @@ exclude:
   - _pages/blog.md
   - _includes/repository/
   - _pages/teaching.md
+  - _books/
+  - _projects/2_project.md
+  - _projects/3_project.md
+  - _projects/7_project.md
+  - _projects/8_project.md
 keep_files:
   - CNAME
   - .nojekyll
