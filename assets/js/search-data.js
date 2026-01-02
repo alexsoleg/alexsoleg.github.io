@@ -64,16 +64,14 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
+            },},{id: "news-i-started-my-phd-in-machine-learning-at-universitat-politècnica-de-catalunya-upc-supervised-by-prof-javier-ruiz-hidalgo-and-prof-eliseo-ruiz",
+          title: 'I started my PhD in Machine Learning at Universitat Politècnica de Catalunya (UPC),...',
           description: "",
-          section: "News",},{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
+          section: "News",},{id: "news-my-first-paper-for-my-phd-cartnet-has-been-accepted-in-digital-discovery",
+          title: 'My first paper for my PhD, CartNet, has been accepted in Digital Discovery!...',
           description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+          section: "News",},{id: "news-we-published-a-new-preprint-prism-periodic-representation-with-multiscale-and-similarity-graph-modelling-for-enhanced-crystal-structure-property-prediction",
+          title: 'We published a new preprint: PRISM: Periodic Representation with multIscale and Similarity graph...',
           description: "",
           section: "News",},{id: "projects-project-1",
           title: 'project 1',
