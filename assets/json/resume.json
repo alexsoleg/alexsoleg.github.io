@@ -151,13 +151,16 @@
       "area": "Coarse-Grained Machine Learning Force Fields",
       "startDate": "2025-05-01",
       "endDate": "2025-07-01",
-      "location": "Luxembourg"
+      "location": "Luxembourg",
+      "courses": [
+        "Supervised by Prof. Alexandre Tkatchenko."
+      ]
     },
     {
       "institution": "Universitat Politècnica de Catalunya (UPC)",
       "area": "Telecommunication Engineering (Audiovisual Systems major)",
       "studyType": "MSc",
-      "startDate": "2018-01-01",
+      "startDate": "2018-09-01",
       "endDate": "2020-12-31",
       "location": "Barcelona, Spain",
       "courses": [
