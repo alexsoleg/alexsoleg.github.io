@@ -46,22 +46,12 @@
     },
     {
       "name": "Institute of Theoretical and Computational Chemistry, Universitat de Barcelona (IQTCUB)",
-      "position": "Research Technician",
-      "location": "Barcelona, Spain",
-      "startDate": "2023-05-05",
-      "endDate": "2024-11-30",
-      "highlights": [
-        "Developed graph neural networks for property prediction in crystal structures within the AIQUANEURO project.",
-        "Work supervised by Prof. Eliseo Ruiz."
-      ]
-    },
-    {
-      "name": "IQTC",
       "position": "Research Scientist",
       "location": "Barcelona, Spain",
       "startDate": "2023-04-01",
       "highlights": [
-        "Research on graph neural networks for materials/crystal property prediction and self-supervised learning."
+        "Developed graph neural networks for property prediction in crystal structures within the AIQUANEURO project.",
+        "Work supervised by Prof. Eliseo Ruiz."
       ]
     },
     {
@@ -84,7 +74,7 @@
     {
       "name": "Vicomtech",
       "position": "Research Assistant (Computer Vision)",
-      "location": "Donostia–San Sebastián, Spain",
+      "location": "Donostia, Spain",
       "startDate": "2021-01-15",
       "endDate": "2022-06-30",
       "highlights": [
@@ -250,8 +240,7 @@
         "Detection & tracking",
         "Scene text recognition",
         "Remote sensing",
-        "3D point cloud processing",
-        "Optical Character Recognition (OCR)"
+        "3D point cloud processing"
       ]
     }
   ],
