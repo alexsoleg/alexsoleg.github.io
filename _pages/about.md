@@ -2,7 +2,8 @@
 layout: about
 title: about
 permalink: /
-subtitle: "PhD Candidate in Deep Learning @ Universitat Politècnica de Catalunya (UPC)"
+subtitle: "**PhD Candidate in Deep Learning** @ Universitat Politècnica de Catalunya (UPC)
++5 years of experience in Machine Learning in industry and academia"
 
 profile:
   align: right
