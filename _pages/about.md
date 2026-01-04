@@ -24,8 +24,12 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
+<div style="text-align: justify;">
+
 I am pursuing a PhD at the Image Processing Group, UPC, under the supervision of Javier Ruiz-Hidalgo and Eliseo Ruiz. My research interests revolve around **graph neural networks and self-supervised learning**, with a particular focus on their application to **molecular and crystalline systems**.
 
 With over **5 years of experience bridging industry and academia**, I have had the privilege to apply my skills in diverse environments. My journey includes time as a **Research Fellow at Istituto Italiano di Tecnologia**, where I delved into computer vision, as well as roles as a **Research Assistant at Vicomtech and TU Delft**. I am passionate about leveraging machine learning to solve complex theoretical and practical problems.
 
 I obtained my **MSc in Telecommunications Engineering** (2020) and a **BSc in Telecommunications Technologies and Services Engineering** (2018) at **Universitat Politècnica de Catalunya**. During my studies, I also completed stays at **Télécom ParisTech**, **TU Delft**, and **Université du Luxembourg**.
+
+</div>
