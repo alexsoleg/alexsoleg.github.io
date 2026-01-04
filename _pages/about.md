@@ -24,7 +24,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-<div style="text-align: justify;">
+<div style="text-align: justify;" markdown="1">
 
 I am pursuing a **PhD** at the [**Image Processing Group**](https://imatge.upc.edu/web/) at **Universitat Politècnica de Catalunya (UPC)**, under the supervision of **Javier Ruiz-Hidalgo** and **Eliseo Ruiz**. My research interests revolve around **graph neural networks and self-supervised learning**, with a particular focus on their application to **molecular and crystalline systems**.
 
