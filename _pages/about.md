@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: "<b>PhD Candidate in Machine Learning</b> @ Universitat Politècnica de Catalunya (<b>UPC</b>)"
+subtitle: "<b>PhD Candidate in Machine Learning</b> @ Universitat Politècnica de Catalunya (<b>UPC</b>)<br>+5 years of experience in industry and academia"
 
 profile:
   align: right
