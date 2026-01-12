@@ -1,12 +1,12 @@
 metadata:
-  last_updated: '2026-01-02'
+  last_updated: '2026-01-12'
 papers:
   Da_TlhIAAAAJ:2osOgNQ5qMEC:
     citations: 0
     title: Leveraging Quantum Machine Learning for Intrusion Detection in Software-Defined Networks
     year: '2025'
   Da_TlhIAAAAJ:9yKSN-GCB0IC:
-    citations: 6
+    citations: 7
     title: 'A Cartesian encoding graph neural network for crystal structure property prediction: application to thermal ellipsoid estimation'
     year: '2025'
   Da_TlhIAAAAJ:IjCSPb-OGe4C:
