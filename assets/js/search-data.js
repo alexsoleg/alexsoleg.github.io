@@ -11,14 +11,14 @@ ninja.data = [{
     },
   },{id: "nav-publications",
           title: "publications",
-          description: "",
+          description: "Papers, preprints, conference work, and theses. Generated from BibTeX.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/publications/";
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "A growing collection of your cool projects.",
+          description: "Academic research projects, code, and personal creative work.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -33,45 +33,46 @@ ninja.data = [{
         },{id: "news-i-started-my-phd-in-machine-learning-at-universitat-politècnica-de-catalunya-upc-supervised-by-prof-javier-ruiz-hidalgo-and-prof-eliseo-ruiz",
           title: 'I started my PhD in Machine Learning at Universitat Politècnica de Catalunya (UPC),...',
           description: "",
-          section: "News",},{id: "news-my-first-paper-for-my-phd-cartnet-has-been-accepted-in-digital-discovery",
-          title: 'My first paper for my PhD, CartNet, has been accepted in Digital Discovery!...',
+          section: "News",},{id: "news-cartnet-was-published-in-digital-discovery-the-paper-introduces-a-cartesian-aware-graph-neural-network-for-crystal-property-prediction-with-a-first-application-to-thermal-ellipsoid-estimation",
+          title: 'CartNet was published in Digital Discovery. The paper introduces a Cartesian-aware graph neural...',
           description: "",
-          section: "News",},{id: "news-we-published-a-new-preprint-prism-periodic-representation-with-multiscale-and-similarity-graph-modelling-for-enhanced-crystal-structure-property-prediction",
-          title: 'We published a new preprint: PRISM: Periodic Representation with multIscale and Similarity graph...',
+          section: "News",},{id: "news-prism-was-published-in-npj-computational-materials-the-paper-studies-periodic-and-multiscale-graph-modelling-for-crystal-property-prediction",
+          title: 'PRISM was published in npj Computational Materials. The paper studies periodic and multiscale...',
+          description: "",
+          section: "News",},{id: "news-two-new-preprints-are-online-machine-learning-multiscale-interactions-and-unate-both-continue-my-work-on-graph-learning-for-molecular-and-crystalline-systems",
+          title: 'Two new preprints are online: Machine Learning Multiscale Interactions and UNATE. Both continue...',
           description: "",
           section: "News",},{id: "projects-cartnet",
           title: 'CartNet',
-          description: "CartNet Project",
+          description: "Cartesian-aware graph neural network for crystal property prediction and thermal ellipsoid estimation.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
+            },},{id: "projects-prism",
+          title: 'PRISM',
+          description: "Periodic and multiscale graph modelling for crystal property prediction.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_project/";
+            },},{id: "projects-muse",
+          title: 'MuSE',
+          description: "Hierarchical machine learning for multiscale interactions in molecules and materials.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_project/";
             },},{id: "projects-la-barraca-himnes-de-noticiari",
-          title: 'LA BARRACA - Himnes de noticiari',
-          description: "Music video for La Barraca",
+          title: 'La Barraca - Himnes de Noticiari',
+          description: "Music video for La Barraca&#39;s &quot;Himnes de Noticiari&quot;.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/4_project/";
-            },},{id: "projects-project-5",
-          title: 'project 5',
-          description: "a project with a background image",
+            },},{id: "projects-unate",
+          title: 'UNATE',
+          description: "Unsupervised atomic embeddings for crystal structure property prediction.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/5_project/";
-            },},{id: "projects-project-6",
-          title: 'project 6',
-          description: "a project with no image",
+            },},{id: "projects-river-debris-detection",
+          title: 'River debris detection',
+          description: "Deep learning and Sentinel-2 imagery for floating debris detection in rivers.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/6_project/";
-            },},{id: "projects-project-9",
-          title: 'project 9',
-          description: "another project with an image 🎉",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/9_project/";
             },},{
-        id: 'social-cv',
-        title: 'CV',
-        section: 'Socials',
-        handler: () => {
-          window.open("/assets/pdf/example_pdf.pdf", "_blank");
-        },
-      },{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
