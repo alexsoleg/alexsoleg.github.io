@@ -35,35 +35,27 @@
       "position": "Substitute Professor",
       "location": "Barcelona",
       "startDate": "2023-09-01",
-      "highlights": [
-        "Teach undergraduate and graduate material connected to machine learning, signal processing, and engineering."
-      ]
+      "highlights": ["Teach undergraduate and graduate material connected to machine learning, signal processing, and engineering."]
     },
     {
       "name": "UPC School (Universitat Politècnica de Catalunya)",
       "position": "Lecturer",
       "location": "Barcelona",
       "startDate": "2025-05-01",
-      "highlights": [
-        "Lecturer role in UPC School programs."
-      ]
+      "highlights": ["Lecturer role in UPC School programs."]
     },
     {
       "name": "IQTC",
       "position": "Research Scientist",
       "location": "Barcelona",
       "startDate": "2023-04-01",
-      "highlights": [
-        "Work on self-supervised graph neural networks to accelerate material discovery."
-      ]
+      "highlights": ["Work on self-supervised graph neural networks to accelerate material discovery."]
     },
     {
       "name": "OPIT - Open Institute of Technology",
       "position": "OPIT Adjunct Lecturer",
       "startDate": "2023-02-01",
-      "highlights": [
-        "Teach machine learning and computer vision topics in remote programs."
-      ]
+      "highlights": ["Teach machine learning and computer vision topics in remote programs."]
     },
     {
       "name": "Istituto Italiano di Tecnologia",
@@ -103,9 +95,7 @@
       "position": "Lecturer in Computer Vision",
       "startDate": "2021-04-01",
       "endDate": "2021-07-01",
-      "highlights": [
-        "Contributed material for a Master's program in Computer Vision, including backbones and people detection and tracking."
-      ]
+      "highlights": ["Contributed material for a Master's program in Computer Vision, including backbones and people detection and tracking."]
     },
     {
       "name": "Pervasive Technologies",
@@ -124,9 +114,7 @@
       "location": "Tàrrega",
       "startDate": "2017-07-01",
       "endDate": "2017-09-01",
-      "highlights": [
-        "Extracted client website content to generate dynamic and personalized iOS app views."
-      ]
+      "highlights": ["Extracted client website content to generate dynamic and personalized iOS app views."]
     }
   ],
   "education": [
@@ -136,9 +124,7 @@
       "studyType": "PhD Candidate",
       "startDate": "2023-04-01",
       "location": "Barcelona",
-      "courses": [
-        "Supervised by Prof. Javier Ruiz-Hidalgo and Prof. Eliseo Ruiz."
-      ]
+      "courses": ["Supervised by Prof. Javier Ruiz-Hidalgo and Prof. Eliseo Ruiz."]
     },
     {
       "institution": "University of Luxembourg",
@@ -147,9 +133,7 @@
       "startDate": "2025-05-01",
       "endDate": "2025-07-01",
       "location": "Luxembourg",
-      "courses": [
-        "Supervised by Prof. Alexandre Tkatchenko."
-      ]
+      "courses": ["Supervised by Prof. Alexandre Tkatchenko."]
     },
     {
       "institution": "Universitat Politècnica de Catalunya",
@@ -158,9 +142,7 @@
       "startDate": "2018-09-01",
       "endDate": "2020-12-31",
       "location": "Barcelona",
-      "courses": [
-        "MSc thesis completed during an exchange at TU Delft."
-      ]
+      "courses": ["MSc thesis completed during an exchange at TU Delft."]
     },
     {
       "institution": "Delft University of Technology",
@@ -169,9 +151,7 @@
       "startDate": "2020-03-01",
       "endDate": "2020-11-01",
       "location": "Delft, The Netherlands",
-      "courses": [
-        "Thesis: \"A learning approach for garbage and debris identification\"."
-      ]
+      "courses": ["Thesis: \"A learning approach for garbage and debris identification\"."]
     },
     {
       "institution": "Universitat Politècnica de Catalunya",
@@ -188,9 +168,7 @@
       "startDate": "2018-03-01",
       "endDate": "2018-08-01",
       "location": "Paris, France",
-      "courses": [
-        "Thesis: \"Parameters estimation from remote sensing data for the generation of virtual 3D city models\"."
-      ]
+      "courses": ["Thesis: \"Parameters estimation from remote sensing data for the generation of virtual 3D city models\"."]
     }
   ],
   "publications": [
@@ -263,26 +241,11 @@
   "skills": [
     {
       "name": "Machine Learning",
-      "keywords": [
-        "Graph neural networks",
-        "PyTorch",
-        "Self-supervised learning",
-        "Unsupervised learning",
-        "JAX",
-        "TensorFlow",
-        "Scikit-learn"
-      ]
+      "keywords": ["Graph neural networks", "PyTorch", "Self-supervised learning", "Unsupervised learning", "JAX", "TensorFlow", "Scikit-learn"]
     },
     {
       "name": "Scientific Computing",
-      "keywords": [
-        "Python",
-        "SciPy",
-        "NumPy",
-        "Pandas",
-        "HPC",
-        "LaTeX"
-      ]
+      "keywords": ["Python", "SciPy", "NumPy", "Pandas", "HPC", "LaTeX"]
     },
     {
       "name": "Computer Vision",
@@ -298,13 +261,7 @@
     },
     {
       "name": "Engineering",
-      "keywords": [
-        "Docker",
-        "Git",
-        "Bash",
-        "APIs",
-        "Google Cloud Platform"
-      ]
+      "keywords": ["Docker", "Git", "Bash", "APIs", "Google Cloud Platform"]
     }
   ],
   "languages": [
@@ -332,12 +289,7 @@
   "interests": [
     {
       "name": "Research",
-      "keywords": [
-        "Graph neural networks",
-        "Molecular systems",
-        "Crystal property prediction",
-        "Computer vision"
-      ]
+      "keywords": ["Graph neural networks", "Molecular systems", "Crystal property prediction", "Computer vision"]
     }
   ]
 }
