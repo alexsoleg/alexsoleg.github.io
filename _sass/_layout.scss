@@ -122,6 +122,9 @@ body.sticky-bottom-footer {
       margin-bottom: 0;
       font-size: 0.92rem;
       line-height: 1.58;
+      text-align: justify;
+      text-align-last: left;
+      hyphens: auto;
       color: var(--global-text-color-light);
     }
   }
