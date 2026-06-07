@@ -38,16 +38,227 @@ body.sticky-bottom-footer {
   }
 }
 
-// TODO: redefine content layout.
+.academic-home {
+  .academic-header {
+    margin-bottom: 1.5rem;
+    padding: 2.25rem 0 1.25rem;
+    border-bottom: 1px solid var(--global-divider-color);
+
+    .post-title {
+      margin-bottom: 0.35rem;
+      line-height: 1.05;
+    }
+
+    .desc {
+      max-width: 760px;
+      margin-bottom: 0;
+      font-size: 1.05rem;
+      line-height: 1.55;
+      color: var(--global-text-color-light);
+    }
+  }
+
+  .profile {
+    margin-top: 0.25rem;
+
+    img {
+      border-radius: 8px !important;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  .intro-copy {
+    max-width: 680px;
+
+    p {
+      font-size: 1.02rem;
+      line-height: 1.72;
+    }
+  }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    clear: both;
+    margin: 2rem 0 1.25rem;
+  }
+
+  .research-card {
+    min-height: 210px;
+    padding: 1.25rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 8px;
+    background: var(--global-card-bg-color);
+
+    i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      color: var(--global-theme-color);
+      background: rgba(38, 70, 83, 0.08);
+      font-size: 1.1rem;
+    }
+
+    h3 {
+      margin-bottom: 0.65rem;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    p {
+      margin-bottom: 0;
+      font-size: 0.92rem;
+      line-height: 1.58;
+      color: var(--global-text-color-light);
+    }
+  }
+
+  .profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 1.5rem 0 2.25rem;
+
+    .btn {
+      border: 1px solid var(--global-divider-color);
+      border-radius: 8px;
+      color: var(--global-text-color);
+      background: var(--global-bg-color);
+      text-transform: none;
+
+      &:hover {
+        border-color: var(--global-theme-color);
+        color: var(--global-theme-color);
+        text-decoration: none;
+      }
+    }
+  }
+
+  .section-heading {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--global-divider-color);
+    font-size: 1.35rem;
+    text-transform: lowercase;
+  }
+}
 
 /******************************************************************************
  * Publications
  ******************************************************************************/
 
-// TODO: redefine publications layout.
+.publications {
+  margin-top: 0.75rem;
+
+  .row {
+    margin-bottom: 1.35rem;
+    padding-bottom: 1.35rem;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .title {
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .author,
+  .periodical {
+    line-height: 1.45;
+  }
+
+  .links {
+    margin-top: 0.45rem;
+
+    .btn {
+      border-radius: 7px;
+      text-transform: none;
+    }
+  }
+}
 
 /*****************************************************************************
 * Projects
 *****************************************************************************/
 
-// TODO: redefine projects layout.
+.projects {
+  &.projects h2.category {
+    margin: 0 0 1.25rem;
+    padding-top: 1.75rem;
+    border-bottom: 1px solid var(--global-divider-color);
+    color: var(--global-text-color);
+    font-size: 1.4rem;
+    text-align: left;
+    text-transform: lowercase;
+  }
+
+  .card {
+    overflow: hidden;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 8px;
+    box-shadow: none;
+    transition:
+      border-color 160ms ease,
+      transform 160ms ease;
+
+    &:hover {
+      border-color: var(--global-theme-color);
+      transform: translateY(-2px);
+    }
+
+    .card-img-top {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      padding-top: 0;
+      border-bottom: 1px solid var(--global-divider-color);
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-title {
+      margin-bottom: 0.45rem;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    .card-text {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--global-text-color-light);
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .academic-home {
+    .academic-header {
+      padding-top: 1.35rem;
+    }
+
+    .profile.float-right,
+    .profile.float-left {
+      float: none !important;
+      width: min(100%, 320px);
+      margin: 0 auto 1.25rem;
+    }
+
+    .intro-copy {
+      max-width: none;
+    }
+
+    .research-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .research-card {
+      min-height: 0;
+    }
+  }
+}

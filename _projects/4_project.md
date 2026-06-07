@@ -1,7 +1,7 @@
 ---
 layout: page
-title: LA BARRACA - Himnes de noticiari
-description: Music video for La Barraca
+title: La Barraca - Himnes de Noticiari
+description: Music video for La Barraca's "Himnes de Noticiari".
 img: assets/img/himnes_noticiari.png
 importance: 3
 category: fun
@@ -13,5 +13,5 @@ category: fun
     </div>
 </div>
 <div class="caption">
-    Music video for 'Himnes de Noticiari' by La Barraca, recorded in La Fageda del Jordà (Olot). My responsibilities were direction, production, editing, and visual effects.
+    Music video for "Himnes de Noticiari" by La Barraca, recorded in La Fageda del Jordà, Olot. I directed, produced, edited, and handled the visual effects.
 </div>

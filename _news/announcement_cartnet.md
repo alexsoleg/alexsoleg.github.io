@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-My first paper for my PhD, [CartNet](https://pubs.rsc.org/en/content/articlehtml/2024/dd/d4dd00352g), has been accepted in Digital Discovery!
+CartNet was published in [Digital Discovery](https://pubs.rsc.org/en/content/articlehtml/2024/dd/d4dd00352g). The paper introduces a Cartesian-aware graph neural network for crystal property prediction, with a first application to thermal ellipsoid estimation.

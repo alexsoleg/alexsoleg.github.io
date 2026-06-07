@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: "**PhD Candidate in Machine Learning** @ Universitat Politècnica de Catalunya (**UPC**)<br>**+5 years of experience in industry and academia**"
+subtitle: "PhD candidate in machine learning at Universitat Politècnica de Catalunya, working on graph learning for molecular and crystalline systems."
 
 profile:
   align: right
@@ -16,7 +16,7 @@ social: true # includes social icons at the bottom of the page
 announcements:
   enabled: true # includes a list of news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
+  limit: 6 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
   enabled: false
@@ -24,12 +24,36 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-<div style="text-align: justify;" markdown="1">
+<div class="intro-copy" markdown="1">
 
-I am pursuing a **PhD** at the [**Image Processing Group**](https://imatge.upc.edu/web/) at **Universitat Politècnica de Catalunya (UPC)**, under the supervision of **Javier Ruiz-Hidalgo** and **Eliseo Ruiz**. My research interests revolve around **graph neural networks and self-supervised learning**, with a particular focus on their application to **molecular and crystalline systems**.
+I am a PhD candidate at the [Image Processing Group](https://imatge.upc.edu/web/) at Universitat Politècnica de Catalunya (UPC), supervised by Javier Ruiz-Hidalgo and Eliseo Ruiz. My work focuses on graph neural networks, self-supervised learning, and machine learning models for molecular and crystalline systems.
 
-With over **5 years of experience bridging industry and academia**, I have had the privilege to apply my skills in diverse environments. My journey includes time as a **Research Fellow at Istituto Italiano di Tecnologia**, where I delved into computer vision, as well as roles as a **Research Assistant at Vicomtech and TU Delft**. I am passionate about leveraging machine learning to solve complex theoretical and practical problems.
+My current research asks how structural information can be encoded so that models learn useful representations for materials, molecular qubits, and multiscale physical systems. Recent work includes CartNet for thermal ellipsoid estimation, PRISM for crystal property prediction, and new preprints on multiscale interactions and unsupervised atomic embeddings.
 
-I obtained my **MSc in Telecommunications Engineering** (2020) and a **BSc in Telecommunications Technologies and Services Engineering** (2018) at **Universitat Politècnica de Catalunya (UPC)**. During my studies, I also completed stays at **Télécom ParisTech**, **TU Delft**, and **Université du Luxembourg**.
+Before the PhD, I worked on computer vision and remote sensing at Vicomtech, TU Delft, and Istituto Italiano di Tecnologia. I received my MSc in Telecommunications Engineering and BSc in Telecommunications Technologies and Services Engineering from UPC, with research stays at Télécom ParisTech, TU Delft, and the University of Luxembourg.
 
+</div>
+
+<div class="research-grid">
+  <div class="research-card">
+    <i class="fa-solid fa-diagram-project"></i>
+    <h3>Graph learning for materials</h3>
+    <p>Crystal and molecular graphs need geometry, chemistry, and periodic structure. My work builds models that encode these constraints directly.</p>
+  </div>
+  <div class="research-card">
+    <i class="fa-solid fa-atom"></i>
+    <h3>Molecular and crystalline systems</h3>
+    <p>I work with collaborators in computational chemistry on property prediction, thermal motion, molecular qubits, and force-field learning.</p>
+  </div>
+  <div class="research-card">
+    <i class="fa-solid fa-layer-group"></i>
+    <h3>Self-supervised representations</h3>
+    <p>I am interested in pretraining and multiscale representations that use unlabeled structure before labeled data becomes available.</p>
+  </div>
+</div>
+
+<div class="profile-links">
+  <a class="btn btn-sm z-depth-0" href="{{ '/publications/' | relative_url }}">publications</a>
+  <a class="btn btn-sm z-depth-0" href="{{ '/projects/' | relative_url }}">research projects</a>
+  <a class="btn btn-sm z-depth-0" href="{{ '/cv/' | relative_url }}">cv</a>
 </div>

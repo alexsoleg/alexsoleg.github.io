@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-01-12'
+  last_updated: '2026-06-07'
 papers:
   Da_TlhIAAAAJ:2osOgNQ5qMEC:
     citations: 0
@@ -19,8 +19,8 @@ papers:
     year: '2018'
   Da_TlhIAAAAJ:Y0pCki6q_DkC:
     citations: 0
-    title: 'PRISM: Periodic Representation with multIscale and Similarity graph Modelling for enhanced crystal structure property prediction'
-    year: '2025'
+    title: 'PRISM: periodic representation with multiscale and similarity graph modelling for enhanced crystal structure property prediction'
+    year: '2026'
   Da_TlhIAAAAJ:qjMakFHDy7sC:
     citations: 2
     title: Exploring hyperfine coupling in molecular qubits
