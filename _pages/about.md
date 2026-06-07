@@ -26,7 +26,7 @@ latest_posts:
 
 <div class="intro-copy" markdown="1">
 
-I am a **PhD candidate** at the [Image Processing Group](https://imatge.upc.edu/web/) at Universitat Politècnica de Catalunya (UPC), supervised by Javier Ruiz-Hidalgo and Eliseo Ruiz. My work focuses on **graph neural networks**, self-supervised learning, and machine learning models for **molecular and crystalline systems**.
+I am a **PhD candidate** at the [Image Processing Group](https://imatge.upc.edu/web/) at Universitat Politècnica de Catalunya (UPC), supervised by Javier Ruiz-Hidalgo and Eliseo Ruiz. My work focuses on **graph neural networks** and **self-supervised learning** for **molecular and crystalline systems**.
 
 My current research asks how structural information can be encoded so that models learn useful representations for **materials**, **molecular qubits**, and **multiscale physical systems**. Recent work includes papers on **CartNet** for thermal ellipsoid estimation, **PRISM** for crystal property prediction, **MuSE** for machine learning multiscale interactions, and on **unsupervised atomic embeddings**.
 
