@@ -2,7 +2,7 @@
 layout: page
 title: MuSE
 description: Hierarchical machine learning for multiscale interactions in molecules and materials.
-img:
+img: assets/img/muse_logo.png
 redirect: https://arxiv.org/abs/2605.25710
 importance: 3
 category: academic

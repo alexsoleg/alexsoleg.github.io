@@ -15,7 +15,7 @@ footer_text: >
   Machine learning, graph neural networks, and molecular materials research.
 keywords: Àlex Solé, Alex Sole, machine learning, graph neural networks, self-supervised learning, molecular systems, crystal property prediction, computational materials # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: muse_favicon.png # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://alexsoleg.github.io # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/. Leave blank for root
@@ -286,6 +286,8 @@ scholar:
   details_link: Details
 
   query: "@*"
+  sort_by: none
+  order: ascending
   group_by: year
   group_order: descending
 

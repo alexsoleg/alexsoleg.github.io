@@ -546,8 +546,21 @@ footer.sticky-bottom {
 }
 
 .date-column {
-  width: 75px;
-  transform: translateX(-15px) translateY(-5px);
+  transform: translateY(-5px);
+}
+
+@media (min-width: 768px) {
+  .cv {
+    .date-column {
+      flex: 0 0 11rem;
+      max-width: 11rem;
+    }
+
+    .date-column + .col-md-10 {
+      flex: 0 0 calc(100% - 11rem);
+      max-width: calc(100% - 11rem);
+    }
+  }
 }
 
 // Repositories

@@ -69,6 +69,14 @@ body.sticky-bottom-footer {
 
   .intro-copy {
     max-width: 680px;
+    text-align: justify;
+    text-align-last: left;
+    hyphens: auto;
+
+    strong {
+      font-weight: 650;
+      color: var(--global-text-color);
+    }
 
     p {
       font-size: 1.02rem;
@@ -211,8 +219,9 @@ body.sticky-bottom-footer {
     }
 
     .card-img-top {
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
+      background: #fff;
       padding-top: 0;
       border-bottom: 1px solid var(--global-divider-color);
     }
