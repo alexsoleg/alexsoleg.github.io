@@ -62,6 +62,11 @@ ninja.data = [{
           description: "Music video for La Barraca&#39;s &quot;Himnes de Noticiari&quot;.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/4_project/";
+            },},{id: "projects-lomemefest",
+          title: 'LoMemefest',
+          description: "Festival de l&#39;humor de Ponent.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project/";
             },},{id: "projects-river-debris-detection",
           title: 'River debris detection',
           description: "Deep learning and Sentinel-2 imagery for floating debris detection in rivers.",
