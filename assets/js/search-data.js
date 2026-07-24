@@ -54,7 +54,7 @@ ninja.data = [{
               window.location.href = "/projects/2_project/";
             },},{id: "projects-muse",
           title: 'MuSE',
-          description: "Hierarchical machine learning for multiscale interactions in molecules and materials.",
+          description: "Hierarchical atomistic learning through soft coarse-graining across multiple spatial scales.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/3_project/";
             },},{id: "projects-la-barraca-himnes-de-noticiari",
@@ -72,8 +72,8 @@ ninja.data = [{
           description: "Deep learning and Sentinel-2 imagery for floating debris detection in rivers.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/6_project/";
-            },},{id: "projects-l-entrevista-subt",
-          title: 'L’Entrevista Subt',
+            },},{id: "projects-l-entrevista",
+          title: 'L’Entrevista',
           description: "Short film.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/7_lentrevista_subt/";
@@ -124,30 +124,4 @@ ninja.data = [{
         handler: () => {
           window.open("https://scholar.google.com/citations?user=Da_TlhIAAAAJ", "_blank");
         },
-      },{
-      id: 'light-theme',
-      title: 'Change theme to light',
-      description: 'Change the theme of the site to Light',
-      section: 'Theme',
-      handler: () => {
-        setThemeSetting("light");
-      },
-    },
-    {
-      id: 'dark-theme',
-      title: 'Change theme to dark',
-      description: 'Change the theme of the site to Dark',
-      section: 'Theme',
-      handler: () => {
-        setThemeSetting("dark");
-      },
-    },
-    {
-      id: 'system-theme',
-      title: 'Use system default theme',
-      description: 'Change the theme of the site to System Default',
-      section: 'Theme',
-      handler: () => {
-        setThemeSetting("system");
-      },
-    },];
+      },];
