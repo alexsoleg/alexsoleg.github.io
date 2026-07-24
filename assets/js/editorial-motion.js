@@ -171,10 +171,12 @@
     return clamp((viewportHeight * entryPoint - bounds.top) / travel);
   };
 
-  const stickyProgress = (sceneBounds, stageBounds, stickyTop) => {
+  const stickyPreviewProgress = (sceneBounds, stageBounds, viewportHeight, stickyTop, entryPoint = 0.9) => {
     if (!sceneBounds || !stageBounds) return 1;
-    const travel = Math.max(sceneBounds.height - stageBounds.height, 1);
-    return clamp((stickyTop - sceneBounds.top) / travel);
+    const previewTop = viewportHeight * entryPoint;
+    const stickyTravel = Math.max(sceneBounds.height - stageBounds.height, 1);
+    const totalTravel = Math.max(previewTop - stickyTop + stickyTravel, 1);
+    return clamp((previewTop - sceneBounds.top) / totalTravel);
   };
 
   const viewportProgress = (bounds, viewportHeight, entryPoint = 0.94, settlePoint = 0.34) => {
@@ -217,30 +219,30 @@
     setNumber(flow, "--flow-scale", 1.02 + 0.05 * flowProgress * distanceScale);
     setNumber(flow, "--flow-opacity", 0.88 - 0.46 * flowProgress);
 
-    const atomistic = words[0];
+    const machineLearning = words[0];
     const graphs = words[1];
     const dynamics = words[2];
-    const atomIn = range(progress, 0, 0.18);
-    const atomOut = range(progress, 0.3, 0.48);
+    const machineIn = range(progress, 0, 0.18);
+    const machineOut = range(progress, 0.3, 0.48);
     const graphIn = range(progress, 0.18, 0.44);
     const graphOut = range(progress, 0.55, 0.72);
     const dynamicsIn = range(progress, 0.46, 0.74);
     const dynamicsSettle = range(progress, 0.86, 1);
 
-    setPixels(atomistic, "--word-x", lerp(viewportWidth * 0.1, -viewportWidth * 0.26, progress) * distanceScale);
-    setPixels(atomistic, "--word-y", lerp(36, -90, progress) * distanceScale);
-    setDegrees(atomistic, "--word-rotate", lerp(1.2, -0.6, progress) * distanceScale);
-    setNumber(atomistic, "--word-opacity", clamp(0.5 + 0.5 * atomIn - 0.78 * atomOut, 0.18, 1));
+    setPixels(machineLearning, "--word-x", -viewportWidth * 0.18 * progress * distanceScale);
+    setPixels(machineLearning, "--word-y", lerp(20, -56, progress) * distanceScale);
+    setDegrees(machineLearning, "--word-rotate", lerp(0.8, -0.45, progress) * distanceScale);
+    setNumber(machineLearning, "--word-opacity", clamp(0.58 + 0.22 * machineIn - 0.18 * machineOut, 0.42, 0.8));
 
-    setPixels(graphs, "--word-x", lerp(viewportWidth * 0.2, -viewportWidth * 0.16, progress) * distanceScale);
-    setPixels(graphs, "--word-y", lerp(70, -20, progress) * distanceScale);
+    setPixels(graphs, "--word-x", -viewportWidth * 0.12 * progress * distanceScale);
+    setPixels(graphs, "--word-y", lerp(30, -20, progress) * distanceScale);
     setDegrees(graphs, "--word-rotate", lerp(-1, 0.6, progress) * distanceScale);
-    setNumber(graphs, "--word-opacity", clamp(0.12 + 0.88 * graphIn - 0.68 * graphOut, 0.12, 1));
+    setNumber(graphs, "--word-opacity", clamp(0.42 + 0.38 * graphIn - 0.2 * graphOut, 0.38, 0.8));
 
-    setPixels(dynamics, "--word-x", lerp(viewportWidth * 0.28, -viewportWidth * 0.1, progress) * distanceScale);
-    setPixels(dynamics, "--word-y", lerp(100, -120, progress) * distanceScale);
+    setPixels(dynamics, "--word-x", -viewportWidth * 0.08 * progress * distanceScale);
+    setPixels(dynamics, "--word-y", lerp(10, -64, progress) * distanceScale);
     setDegrees(dynamics, "--word-rotate", lerp(0.9, -0.5, progress) * distanceScale);
-    setNumber(dynamics, "--word-opacity", clamp(0.1 + 0.9 * dynamicsIn - 0.4 * dynamicsSettle, 0.1, 1));
+    setNumber(dynamics, "--word-opacity", clamp(0.42 + 0.38 * dynamicsIn - 0.15 * dynamicsSettle, 0.38, 0.8));
 
     const portraitLift = range(progress, 0.08, 0.6);
     const portraitExit = range(progress, 0.66, 0.95);
@@ -269,7 +271,7 @@
     const lite = liteMotionEnabled();
     const progress = lite
       ? viewportProgress(geometry.research, viewportHeight, 0.98, 0.26)
-      : stickyProgress(geometry.research, geometry.researchStage, 72);
+      : stickyPreviewProgress(geometry.research, geometry.researchStage, viewportHeight, 72);
     const distanceScale = lite ? 0.8 : 1;
     const headerProgress = lite ? viewportProgress(geometry.researchHeader, viewportHeight, 0.94, 0.6) : range(progress, 0.02, 0.22);
 
@@ -303,7 +305,9 @@
     if (!about) return;
 
     const lite = liteMotionEnabled();
-    const progress = lite ? viewportProgress(geometry.about, viewportHeight, 0.98, 0.22) : stickyProgress(geometry.about, geometry.aboutStage, 72);
+    const progress = lite
+      ? viewportProgress(geometry.about, viewportHeight, 0.98, 0.22)
+      : stickyPreviewProgress(geometry.about, geometry.aboutStage, viewportHeight, 72);
     const distanceScale = lite ? 0.8 : 1;
     const headerProgress = lite ? viewportProgress(geometry.aboutHeader, viewportHeight, 0.94, 0.62) : range(progress, 0.02, 0.2);
     const firstProgress = lite ? viewportProgress(geometry.aboutParagraphs[0], viewportHeight, 0.96, 0.5) : range(progress, 0.14, 0.44);
