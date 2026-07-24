@@ -1,20 +1,34 @@
 $(document).ready(function () {
-  // add toggle functionality to abstract, award and bibtex buttons
-  $("a.abstract").click(function () {
-    $(this).parent().parent().find(".abstract.hidden").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden.open").toggleClass("open");
+  // Keep publication disclosures mutually exclusive and expose their state
+  // to keyboard and assistive-technology users.
+  $(".publication-toggle").on("click", function () {
+    const entry = this.closest(".publication-entry");
+    const targetId = this.getAttribute("aria-controls");
+    const target = document.getElementById(targetId);
+
+    if (!entry || !target) return;
+
+    const willOpen = target.hidden;
+
+    entry.querySelectorAll(".publication-disclosure").forEach((panel) => {
+      panel.hidden = true;
+    });
+    entry.querySelectorAll(".publication-toggle").forEach((button) => {
+      button.setAttribute("aria-expanded", "false");
+    });
+
+    if (willOpen) {
+      target.hidden = false;
+      this.setAttribute("aria-expanded", "true");
+    }
   });
-  $("a.award").click(function () {
-    $(this).parent().parent().find(".abstract.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden.open").toggleClass("open");
+
+  $(".more-authors").on("click", function () {
+    const isExpanded = this.getAttribute("aria-expanded") === "true";
+    this.setAttribute("aria-expanded", String(!isExpanded));
+    this.innerHTML = isExpanded ? this.dataset.collapsedLabel : this.dataset.expandedLabel;
   });
-  $("a.bibtex").click(function () {
-    $(this).parent().parent().find(".abstract.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden").toggleClass("open");
-  });
+
   $("a").removeClass("waves-effect waves-light");
 
   // bootstrap-toc

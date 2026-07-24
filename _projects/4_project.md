@@ -3,8 +3,10 @@ layout: page
 title: La Barraca - Himnes de Noticiari
 description: Music video for La Barraca's "Himnes de Noticiari".
 img: assets/img/himnes_noticiari.png
+thumbnail_alt: Still from La Barraca's Himnes de Noticiari music video.
 importance: 3
 category: fun
+video: true
 ---
 
 <div class="row justify-content-center">

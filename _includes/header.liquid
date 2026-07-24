@@ -3,7 +3,7 @@
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
       {% if page.permalink != '/' %}
-        <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
+        <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/" aria-label="Àlex Solé — home">
           {% if site.title == 'blank' %}
             {% if site.first_name %}
               <span class="font-weight-bold">
@@ -48,8 +48,14 @@
 
           <!-- About -->
           <li class="nav-item {% if page.permalink == '/' %}active{% endif %}">
-            <a class="nav-link" href="{{ '/' | relative_url }}">
-              {{- about_title }}
+            <a
+              class="nav-link"
+              href="{{ '/' | relative_url }}"
+              {% if page.permalink == '/' %}
+                aria-current="page"
+              {% endif %}
+            >
+              About
               {% if page.permalink == '/' %}
                 <span class="sr-only">(current)</span>
               {% endif %}
@@ -107,7 +113,13 @@
                   {%- else -%}
                     {%- assign url = p.url -%}
                   {%- endif %}
-                  <a class="nav-link" href="{{ url | relative_url }}">
+                  <a
+                    class="nav-link"
+                    href="{{ url | relative_url }}"
+                    {% if page.url contains p.url %}
+                      aria-current="page"
+                    {% endif %}
+                  >
                     {{- p.title }}
                     {% if page.url contains p.url %}
                       <span class="sr-only">(current)</span>
@@ -120,18 +132,18 @@
           {% if site.search_enabled %}
             <!-- Search -->
             <li class="nav-item">
-              <button id="search-toggle" title="Search" onclick="openSearchModal()">
-                <span class="nav-link">ctrl k <i class="ti ti-search"></i></span>
+              <button id="search-toggle" type="button" title="Search" aria-label="Search this site" onclick="openSearchModal()">
+                <span class="nav-link"><i class="ti ti-search" aria-hidden="true"></i></span>
               </button>
             </li>
           {% endif %}
           {% if site.enable_darkmode %}
-            <!-- Toogle theme mode -->
+            <!-- Toggle theme mode -->
             <li class="toggle-container">
-              <button id="light-toggle" title="Change theme">
-                <i class="ti ti-sun-moon" id="light-toggle-system"></i>
-                <i class="ti ti-moon-filled" id="light-toggle-dark"></i>
-                <i class="ti ti-sun-filled" id="light-toggle-light"></i>
+              <button id="light-toggle" type="button" title="Change theme" aria-label="Change colour theme">
+                <i class="ti ti-sun-moon" id="light-toggle-system" aria-hidden="true"></i>
+                <i class="ti ti-moon-filled" id="light-toggle-dark" aria-hidden="true"></i>
+                <i class="ti ti-sun-filled" id="light-toggle-light" aria-hidden="true"></i>
               </button>
             </li>
           {% endif %}

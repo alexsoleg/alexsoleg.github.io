@@ -1,80 +1,135 @@
 ---
 layout: default
 ---
-<div class="post academic-home">
-  <header class="post-header academic-header">
-    <h1 class="post-title">
-      {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
-        {{ site.last_name }}
-      {% else %}
-        {{ site.title }}
-      {% endif %}
-    </h1>
-    <p class="desc">{{ page.subtitle | markdownify | remove: '<p>' | remove: '</p>' }}</p>
-  </header>
+<div class="editorial-home" data-editorial-home>
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero__flow" aria-hidden="true">
+      <img src="{{ '/assets/img/editorial-flow-lines.png' | relative_url }}" alt="" width="1672" height="941" fetchpriority="high">
+    </div>
 
-  <article>
-    {% if page.profile %}
-      <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
-        {% if page.profile.image %}
-          {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
-          {% if page.profile.image_circular %}
-            {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
-          {% else %}
-            {% assign profile_image_class = 'img-fluid z-depth-1
-      rounded' %}
-          {% endif %}
-          {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
-      30vw, 95vw"{% endcapture %}
-          {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
-            cache_bust=true
-          %}
-        {% endif %}
-        {% if page.profile.more_info %}
-          <div class="more-info">{{ page.profile.more_info }}</div>
-        {% endif %}
+    <div class="home-hero__words" aria-hidden="true">
+      <span class="home-hero__word home-hero__word--atomistic" data-parallax-speed="0.08">ATOMISTIC</span>
+      <span class="home-hero__word home-hero__word--graphs" data-parallax-speed="-0.05">GRAPHS</span>
+      <span class="home-hero__word home-hero__word--dynamics" data-parallax-speed="0.11">DYNAMICS</span>
+    </div>
+
+    <div class="editorial-shell home-hero__inner">
+      <figure class="home-portrait" data-reveal>
+        <img
+          src="{{ '/assets/img/prof_pic.png' | relative_url | bust_file_cache }}"
+          alt="Portrait of Àlex Solé"
+          width="354"
+          height="472"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </figure>
+
+      <div class="home-hero__copy">
+        <h1 id="home-title" class="home-title" data-reveal>
+          <strong>Àlex</strong>
+          <span>Solé</span>
+        </h1>
+        <p class="home-role" data-reveal>PhD candidate in machine learning</p>
+        <span class="home-accent" aria-hidden="true" data-reveal></span>
+        <p class="home-statement" data-reveal>I develop graph learning methods for atomistic systems.</p>
+        <a class="editorial-cta" href="{{ '/projects/' | relative_url }}" data-reveal>
+          Explore my research
+          <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </a>
       </div>
-    {% endif %}
+    </div>
+  </section>
 
-    <div class="clearfix academic-content">{{ content }}</div>
+  <section id="selected-research" class="selected-research" aria-labelledby="selected-research-title">
+    <div class="editorial-shell">
+      <header class="editorial-section-header" data-reveal>
+        <h2 id="selected-research-title">Selected research</h2>
+      </header>
 
-    <!-- News -->
-    {% if page.announcements and page.announcements.enabled %}
-      <h2 class="section-heading">
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
-      </h2>
-      {% include news.liquid limit=true %}
-    {% endif %}
+      <ul class="research-strip" role="list">
+        <li data-reveal>
+          <a href="https://arxiv.org/abs/2605.25710" aria-label="MuSE research project">
+            <img src="{{ '/assets/img/muse_logo_alpha.png' | relative_url }}" alt="" width="560" height="560">
+            <span>MuSE</span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a href="https://imatge-upc.github.io/CartNet/" aria-label="CartNet research project">
+            <img
+              src="{{ '/assets/img/cartnet_project_transparent.png' | relative_url }}"
+              alt=""
+              width="1537"
+              height="1023"
+            >
+            <span>CartNet</span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a href="https://imatge-upc.github.io/PRISM/" aria-label="PRISM research project">
+            <img
+              src="{{ '/assets/img/prism_frontpage_transparent.png' | relative_url }}"
+              alt=""
+              width="1000"
+              height="1000"
+            >
+            <span>PRISM</span>
+          </a>
+        </li>
+        <li data-reveal>
+          <a
+            href="https://www.sciencedirect.com/science/article/pii/S0303243422000083"
+            aria-label="River debris detection research project"
+          >
+            <img
+              src="{{ '/assets/img/river_debris_project_transparent.png' | relative_url }}"
+              alt=""
+              width="1254"
+              height="1254"
+            >
+            <span>River debris detection</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- Latest posts -->
-    {% if page.latest_posts and page.latest_posts.enabled %}
-      <h2 class="section-heading">
-        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
-      </h2>
-      {% include latest_posts.liquid %}
-    {% endif %}
+  <div class="editorial-shell home-content">
+    <section class="home-about" aria-labelledby="about-work-title" data-reveal>
+      <header class="editorial-section-header">
+        <h2 id="about-work-title">About my work</h2>
+      </header>
+      <div class="home-about__copy">{{ content }}</div>
+      <a class="editorial-text-link" href="{{ '/cv/' | relative_url }}">
+        View my CV
+        <i class="ti ti-arrow-right" aria-hidden="true"></i>
+      </a>
+    </section>
 
-    <!-- Selected papers -->
     {% if page.selected_papers %}
-      <h2 class="section-heading">
-        <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected publications</a>
-      </h2>
-      {% include selected_papers.liquid %}
+      <section class="home-publications" aria-labelledby="selected-publications-title" data-reveal>
+        <header class="editorial-section-header editorial-section-header--linked">
+          <h2 id="selected-publications-title">Selected publications</h2>
+          <a href="{{ '/publications/' | relative_url }}">
+            View all
+            <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </a>
+        </header>
+        {% include selected_papers.liquid %}
+      </section>
     {% endif %}
 
-    <!-- Social -->
     {% if page.social %}
-      <div class="social">
-        <div class="contact-icons">{% include social.liquid %}</div>
-
-        <div class="contact-note">{{ site.contact_note }}</div>
-      </div>
+      <section class="home-contact" aria-labelledby="contact-title" data-reveal>
+        <header class="editorial-section-header">
+          <h2 id="contact-title">Contact</h2>
+        </header>
+        <p>For research collaborations, talks, and scientific exchange.</p>
+        <div class="social">
+          <div class="contact-icons">{% include social.liquid %}</div>
+          <div class="contact-note">{{ site.contact_note }}</div>
+        </div>
+      </section>
     {% endif %}
-
-    {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
-      {% include newsletter.liquid center=true %}
-    {% endif %}
-  </article>
+  </div>
 </div>

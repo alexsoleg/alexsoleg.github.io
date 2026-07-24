@@ -2,11 +2,14 @@
 layout: page
 title: PRISM
 description: Periodic and multiscale graph modelling for crystal property prediction.
-img: assets/img/prism_frontpage.png
+img: assets/img/prism_frontpage_transparent.png
+logo: assets/img/prism_frontpage_transparent.png
+thumbnail_alt: PRISM triangular spectrum mark.
 redirect: https://imatge-upc.github.io/PRISM/
 github: https://github.com/imatge-upc/PRISM
-importance: 2
+importance: 3
 category: academic
+featured: true
 related_publications: true
 ---
 

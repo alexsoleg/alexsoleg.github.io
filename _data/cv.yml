@@ -3,7 +3,7 @@
   contents:
     - Self-supervised graph neural networks for molecular and crystalline systems.
     - Unsupervised atomic representations and structure-aware learning.
-    - Crystal property prediction, thermal motion, molecular qubits, and multiscale force-field learning.
+    - Crystal property prediction, thermal motion, and multiscale force-field learning.
 
 - title: appointments
   type: time_table
