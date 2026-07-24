@@ -24,7 +24,9 @@
 
   <div class="project-card__body">
     <div class="project-card__heading">
-      <h3><a href="{{ project_href }}">{{ project.title }}</a></h3>
+      <h3>
+        <a href="{{ project_href }}">{{ project.title }}</a>
+      </h3>
       <i class="ti ti-arrow-up-right" aria-hidden="true"></i>
     </div>
     {% unless project.logo_only %}
