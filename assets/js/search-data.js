@@ -10,22 +10,22 @@ ninja.data = [{
       window.location.href = "/";
     },
   },{id: "nav-publications",
-          title: "publications",
+          title: "Publications",
           description: "Papers, preprints, conference work, and theses. Generated from BibTeX.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/publications/";
           },
         },{id: "nav-projects",
-          title: "projects",
+          title: "Projects",
           description: "Academic research projects, code, and personal creative work.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
           },
         },{id: "nav-cv",
-          title: "cv",
-          description: "",
+          title: "CV",
+          description: "Research focus, appointments, education, and skills.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
@@ -72,6 +72,16 @@ ninja.data = [{
           description: "Deep learning and Sentinel-2 imagery for floating debris detection in rivers.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/6_project/";
+            },},{id: "projects-l-entrevista-subt",
+          title: 'L’Entrevista Subt',
+          description: "Short film.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/7_lentrevista_subt/";
+            },},{id: "projects-el-primer-dia",
+          title: 'El Primer Dia',
+          description: "Short film.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_el_primer_dia/";
             },},{
         id: 'social-email',
         title: 'email',
