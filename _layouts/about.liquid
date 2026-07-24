@@ -1,47 +1,77 @@
 ---
 layout: default
 ---
+<script>
+  (() => {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const canPrepareMotion =
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      !window.matchMedia('(max-width: 767px)').matches &&
+      !window.matchMedia('(pointer: coarse)').matches &&
+      !connection?.saveData;
+
+    if (canPrepareMotion) {
+      document.documentElement.classList.add('home-motion-prepared');
+      window.addEventListener(
+        'load',
+        () => {
+          if (!window.__editorialHomeMotionReady) {
+            document.documentElement.classList.remove('home-motion-prepared');
+          }
+        },
+        { once: true }
+      );
+    }
+  })();
+</script>
 <div class="editorial-home" data-editorial-home>
-  <section class="home-hero" aria-labelledby="home-title">
-    <div class="home-hero__flow" aria-hidden="true">
-      <img src="{{ '/assets/img/editorial-flow-lines.png' | relative_url }}" alt="" width="1672" height="941" fetchpriority="high">
-    </div>
+  <section class="home-hero" aria-labelledby="home-title" data-scroll-scene="hero">
+    <div class="home-hero__stage">
+      <div class="home-hero__flow" aria-hidden="true">
+        <img src="{{ '/assets/img/editorial-flow-lines.png' | relative_url }}" alt="" width="1672" height="941" fetchpriority="high">
+      </div>
 
-    <div class="home-hero__words" aria-hidden="true">
-      <span class="home-hero__word home-hero__word--atomistic" data-parallax-speed="0.08">ATOMISTIC</span>
-      <span class="home-hero__word home-hero__word--graphs" data-parallax-speed="-0.05">GRAPHS</span>
-      <span class="home-hero__word home-hero__word--dynamics" data-parallax-speed="0.11">DYNAMICS</span>
-    </div>
+      <div class="home-hero__words" aria-hidden="true">
+        <span class="home-hero__word home-hero__word--atomistic">ATOMISTIC</span>
+        <span class="home-hero__word home-hero__word--graphs">GRAPHS</span>
+        <span class="home-hero__word home-hero__word--dynamics">DYNAMICS</span>
+      </div>
 
-    <div class="editorial-shell home-hero__inner">
-      <figure class="home-portrait" data-reveal>
-        <img
-          src="{{ '/assets/img/prof_pic.png' | relative_url | bust_file_cache }}"
-          alt="Portrait of Àlex Solé"
-          width="354"
-          height="472"
-          loading="eager"
-          fetchpriority="high"
-        >
-      </figure>
+      <div class="editorial-shell home-hero__inner">
+        <figure class="home-portrait" data-reveal>
+          <img
+            src="{{ '/assets/img/prof_pic.png' | relative_url | bust_file_cache }}"
+            alt="Portrait of Àlex Solé"
+            width="354"
+            height="472"
+            loading="eager"
+            fetchpriority="high"
+          >
+        </figure>
 
-      <div class="home-hero__copy">
-        <h1 id="home-title" class="home-title" data-reveal>
-          <strong>Àlex</strong>
-          <span>Solé</span>
-        </h1>
-        <p class="home-role" data-reveal>PhD candidate in machine learning</p>
-        <span class="home-accent" aria-hidden="true" data-reveal></span>
-        <p class="home-statement" data-reveal>I develop graph learning methods for atomistic systems.</p>
-        <a class="editorial-cta" href="{{ '/projects/' | relative_url }}" data-reveal>
-          Explore my research
-          <i class="ti ti-arrow-right" aria-hidden="true"></i>
-        </a>
+        <div class="home-hero__copy">
+          <h1 id="home-title" class="home-title" data-reveal>
+            <strong>Àlex</strong>
+            <span>Solé</span>
+          </h1>
+          <p class="home-role" data-reveal>PhD candidate in machine learning</p>
+          <span class="home-accent" aria-hidden="true" data-reveal></span>
+          <p class="home-statement" data-reveal>I develop graph learning methods for atomistic systems.</p>
+          <a class="editorial-cta" href="{{ '/projects/' | relative_url }}" data-reveal>
+            Explore my research
+            <i class="ti ti-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="selected-research" class="selected-research" aria-labelledby="selected-research-title">
+  <section
+    id="selected-research"
+    class="selected-research"
+    aria-labelledby="selected-research-title"
+    data-scroll-scene="research"
+  >
     <div class="editorial-shell">
       <header class="editorial-section-header" data-reveal>
         <h2 id="selected-research-title">Selected research</h2>
@@ -95,19 +125,25 @@ layout: default
   </section>
 
   <div class="editorial-shell home-content">
-    <section class="home-about" aria-labelledby="about-work-title" data-reveal>
-      <header class="editorial-section-header">
-        <h2 id="about-work-title">About my work</h2>
-      </header>
-      <div class="home-about__copy">{{ content }}</div>
-      <a class="editorial-text-link" href="{{ '/cv/' | relative_url }}">
-        View my CV
-        <i class="ti ti-arrow-right" aria-hidden="true"></i>
-      </a>
+    <section class="home-about" aria-labelledby="about-work-title" data-scroll-scene="about">
+      <div class="home-about__stage">
+        <header class="editorial-section-header">
+          <h2 id="about-work-title">About my work</h2>
+        </header>
+        <div class="home-about__copy">{{ content }}</div>
+        <a class="editorial-text-link" href="{{ '/cv/' | relative_url }}">
+          View my CV
+          <i class="ti ti-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
     </section>
 
     {% if page.selected_papers %}
-      <section class="home-publications" aria-labelledby="selected-publications-title" data-reveal>
+      <section
+        class="home-publications"
+        aria-labelledby="selected-publications-title"
+        data-scroll-scene="publications"
+      >
         <header class="editorial-section-header editorial-section-header--linked">
           <h2 id="selected-publications-title">Selected publications</h2>
           <a href="{{ '/publications/' | relative_url }}">
@@ -120,7 +156,7 @@ layout: default
     {% endif %}
 
     {% if page.social %}
-      <section class="home-contact" aria-labelledby="contact-title" data-reveal>
+      <section class="home-contact" aria-labelledby="contact-title" data-scroll-scene="contact">
         <header class="editorial-section-header">
           <h2 id="contact-title">Contact</h2>
         </header>

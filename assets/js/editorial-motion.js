@@ -8,20 +8,57 @@
   if (!motionScopes.length) return;
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const narrowViewport = window.matchMedia("(max-width: 768px)");
+  const narrowViewport = window.matchMedia("(max-width: 767px)");
   const coarsePointer = window.matchMedia("(pointer: coarse)");
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   const revealItems = [];
   const depthItems = [];
-  const parallaxItems = home ? Array.from(home.querySelectorAll("[data-parallax-speed]")) : [];
+
+  const homeScenes = home
+    ? {
+        hero: home.querySelector('[data-scroll-scene="hero"]'),
+        heroStage: home.querySelector(".home-hero__stage"),
+        flow: home.querySelector(".home-hero__flow img"),
+        portrait: home.querySelector(".home-portrait"),
+        copy: home.querySelector(".home-hero__copy"),
+        accent: home.querySelector(".home-accent"),
+        words: Array.from(home.querySelectorAll(".home-hero__word")),
+        research: home.querySelector('[data-scroll-scene="research"]'),
+        researchStage: home.querySelector(".selected-research > .editorial-shell"),
+        researchHeader: home.querySelector(".selected-research .editorial-section-header"),
+        researchItems: Array.from(home.querySelectorAll(".research-strip > li")),
+        about: home.querySelector('[data-scroll-scene="about"]'),
+        aboutStage: home.querySelector(".home-about__stage"),
+        aboutHeader: home.querySelector(".home-about .editorial-section-header"),
+        aboutParagraphs: Array.from(home.querySelectorAll(".home-about__copy > p")),
+        aboutLink: home.querySelector(".home-about .editorial-text-link"),
+        publications: home.querySelector('[data-scroll-scene="publications"]'),
+        publicationsHeader: home.querySelector(".home-publications .editorial-section-header"),
+        publicationEntries: Array.from(home.querySelectorAll(".home-publications .publication-entry")),
+        contact: home.querySelector('[data-scroll-scene="contact"]'),
+        contactHeader: home.querySelector(".home-contact .editorial-section-header"),
+        contactText: home.querySelector(".home-contact > p"),
+        contactSocial: home.querySelector(".home-contact .social"),
+        contactIcons: Array.from(home.querySelectorAll(".home-contact .contact-icons a")),
+        contactNote: home.querySelector(".home-contact .contact-note"),
+      }
+    : null;
 
   let revealObserver;
   let animationFrame;
   let ambientMotionEnabled = false;
+  const homeSceneZones = new Map();
 
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
+  const lerp = (start, end, progress) => start + (end - start) * progress;
+  const smoothstep = (progress) => progress * progress * (3 - 2 * progress);
+  const range = (progress, start, end) => smoothstep(clamp((progress - start) / Math.max(end - start, 0.0001)));
   const saveDataEnabled = () => Boolean(connection && connection.saveData);
-  const liteMotionEnabled = () => narrowViewport.matches || coarsePointer.matches || saveDataEnabled();
+  const liteMotionEnabled = () => narrowViewport.matches || coarsePointer.matches;
+  const setNumber = (element, property, value) => element?.style.setProperty(property, value.toFixed(4));
+  const setPixels = (element, property, value) => element?.style.setProperty(property, `${value.toFixed(2)}px`);
+  const setDegrees = (element, property, value) => element?.style.setProperty(property, `${value.toFixed(3)}deg`);
+  const setPercent = (element, property, value) => element?.style.setProperty(property, `${value.toFixed(2)}%`);
 
   const registerReveal = (element, variant = "soft", delay = 0, direction = 1) => {
     if (!element || revealItems.includes(element)) return;
@@ -45,38 +82,6 @@
     element.dataset.motionDepth = "";
     depthItems.push({ element, strength });
   };
-
-  if (home) {
-    registerReveal(home.querySelector(".home-portrait"), "portrait", 0);
-
-    const heroCopy = Array.from(home.querySelectorAll(".home-hero__copy [data-reveal]"));
-    heroCopy.forEach((element, index) => {
-      let variant = "hero-copy";
-      if (element.classList.contains("home-accent")) variant = "accent";
-      if (element.classList.contains("editorial-cta")) variant = "cta";
-      registerReveal(element, variant, 90 + index * 85);
-    });
-
-    registerReveal(home.querySelector(".selected-research .editorial-section-header"), "heading");
-    registerSequence(home.querySelectorAll(".research-strip > li"), "tile", 95);
-
-    const homeAbout = home.querySelector(".home-about");
-    registerReveal(homeAbout && homeAbout.querySelector(".editorial-section-header"), "heading");
-    registerReveal(homeAbout && homeAbout.querySelector(".home-about__copy"), "section", 80);
-    registerReveal(homeAbout && homeAbout.querySelector(".editorial-text-link"), "cta", 150);
-
-    const homePublications = home.querySelector(".home-publications");
-    registerReveal(homePublications && homePublications.querySelector(".editorial-section-header"), "heading");
-    registerSequence(home.querySelectorAll(".home-publications .publication-entry"), "publication", 65);
-
-    const homeContact = home.querySelector(".home-contact");
-    registerReveal(homeContact && homeContact.querySelector(".editorial-section-header"), "heading");
-    registerReveal(homeContact && homeContact.querySelector(":scope > p"), "soft", 80);
-    registerReveal(homeContact && homeContact.querySelector(".social"), "section", 145);
-
-    registerDepth(home.querySelector(".home-hero"), 0.8);
-    home.querySelectorAll(".research-strip > li").forEach((item) => registerDepth(item, 0.45));
-  }
 
   if (projectsPage) {
     registerReveal(projectsPage.querySelector(".post-header"), "page-intro");
@@ -160,40 +165,308 @@
     revealItems.forEach((item) => revealObserver.observe(item));
   };
 
+  const sceneProgress = (bounds, viewportHeight, entryPoint = 0.92, exitPoint = 0.18) => {
+    if (!bounds) return 1;
+    const travel = Math.max(bounds.height - viewportHeight * exitPoint, viewportHeight * 0.62);
+    return clamp((viewportHeight * entryPoint - bounds.top) / travel);
+  };
+
+  const stickyProgress = (sceneBounds, stageBounds, stickyTop) => {
+    if (!sceneBounds || !stageBounds) return 1;
+    const travel = Math.max(sceneBounds.height - stageBounds.height, 1);
+    return clamp((stickyTop - sceneBounds.top) / travel);
+  };
+
+  const viewportProgress = (bounds, viewportHeight, entryPoint = 0.94, settlePoint = 0.34) => {
+    if (!bounds) return 1;
+    return clamp((viewportHeight * entryPoint - bounds.top) / (viewportHeight * (entryPoint - settlePoint)));
+  };
+
+  const sceneZone = (bounds, viewportHeight) => {
+    if (!bounds) return "missing";
+    if (bounds.bottom < viewportHeight * -0.35) return "after";
+    if (bounds.top > viewportHeight * 1.35) return "before";
+    return "near";
+  };
+
+  const shouldUpdateScene = (key, bounds, viewportHeight) => {
+    const zone = sceneZone(bounds, viewportHeight);
+    const previousZone = homeSceneZones.get(key);
+    homeSceneZones.set(key, zone);
+    return zone === "near" || zone !== previousZone;
+  };
+
+  const updateHeroScene = (viewportWidth, viewportHeight, geometry) => {
+    const { hero, flow, portrait, copy, accent, words } = homeScenes;
+    if (!hero) return;
+
+    const bounds = geometry.hero;
+    const stickyTop = narrowViewport.matches ? 64 : 72;
+    const stageHeight = geometry.heroStage?.height || viewportHeight;
+    const progress = liteMotionEnabled()
+      ? clamp(-bounds.top / Math.max(bounds.height - viewportHeight * 0.38, viewportHeight * 0.62))
+      : clamp((stickyTop - bounds.top) / Math.max(bounds.height - stageHeight, 1));
+    const distanceScale = liteMotionEnabled() ? 0.76 : 1;
+
+    setNumber(home, "--hero-progress", progress);
+
+    const flowProgress = range(progress, 0, 1);
+    setPixels(flow, "--flow-x", -viewportWidth * 0.065 * flowProgress * distanceScale);
+    setPixels(flow, "--flow-y", 88 * flowProgress * distanceScale);
+    setDegrees(flow, "--flow-rotate", 0.35 * flowProgress * distanceScale);
+    setNumber(flow, "--flow-scale", 1.02 + 0.05 * flowProgress * distanceScale);
+    setNumber(flow, "--flow-opacity", 0.88 - 0.46 * flowProgress);
+
+    const atomistic = words[0];
+    const graphs = words[1];
+    const dynamics = words[2];
+    const atomIn = range(progress, 0, 0.18);
+    const atomOut = range(progress, 0.3, 0.48);
+    const graphIn = range(progress, 0.18, 0.44);
+    const graphOut = range(progress, 0.55, 0.72);
+    const dynamicsIn = range(progress, 0.46, 0.74);
+    const dynamicsSettle = range(progress, 0.86, 1);
+
+    setPixels(atomistic, "--word-x", lerp(viewportWidth * 0.1, -viewportWidth * 0.26, progress) * distanceScale);
+    setPixels(atomistic, "--word-y", lerp(36, -90, progress) * distanceScale);
+    setDegrees(atomistic, "--word-rotate", lerp(1.2, -0.6, progress) * distanceScale);
+    setNumber(atomistic, "--word-opacity", clamp(0.5 + 0.5 * atomIn - 0.78 * atomOut, 0.18, 1));
+
+    setPixels(graphs, "--word-x", lerp(viewportWidth * 0.2, -viewportWidth * 0.16, progress) * distanceScale);
+    setPixels(graphs, "--word-y", lerp(70, -20, progress) * distanceScale);
+    setDegrees(graphs, "--word-rotate", lerp(-1, 0.6, progress) * distanceScale);
+    setNumber(graphs, "--word-opacity", clamp(0.12 + 0.88 * graphIn - 0.68 * graphOut, 0.12, 1));
+
+    setPixels(dynamics, "--word-x", lerp(viewportWidth * 0.28, -viewportWidth * 0.1, progress) * distanceScale);
+    setPixels(dynamics, "--word-y", lerp(100, -120, progress) * distanceScale);
+    setDegrees(dynamics, "--word-rotate", lerp(0.9, -0.5, progress) * distanceScale);
+    setNumber(dynamics, "--word-opacity", clamp(0.1 + 0.9 * dynamicsIn - 0.4 * dynamicsSettle, 0.1, 1));
+
+    const portraitLift = range(progress, 0.08, 0.6);
+    const portraitExit = range(progress, 0.66, 0.95);
+    setPixels(portrait, "--portrait-x", -52 * portraitExit * distanceScale);
+    setPixels(portrait, "--portrait-y", -44 * portraitLift * distanceScale);
+    setDegrees(portrait, "--portrait-rotate", -1.4 * portraitLift * distanceScale);
+    setNumber(portrait, "--portrait-opacity", 1 - 0.72 * portraitExit);
+    setPercent(portrait, "--portrait-clip-right", 18 * portraitExit);
+
+    const copyLift = range(progress, 0.12, 0.72);
+    const copyExit = range(progress, 0.58, 0.88);
+    setPixels(copy, "--copy-x", 36 * copyExit * distanceScale);
+    setPixels(copy, "--copy-y", -92 * copyLift * distanceScale);
+    setNumber(copy, "--copy-opacity", 1 - 0.86 * copyExit);
+
+    const accentStretch = range(progress, 0.18, 0.5);
+    const accentExit = range(progress, 0.62, 0.82);
+    setNumber(accent, "--accent-scale", 1 + 5 * accentStretch);
+    setNumber(accent, "--accent-opacity", 1 - accentExit);
+  };
+
+  const updateResearchScene = (viewportHeight, geometry) => {
+    const { research, researchHeader, researchItems } = homeScenes;
+    if (!research) return;
+
+    const lite = liteMotionEnabled();
+    const progress = lite
+      ? viewportProgress(geometry.research, viewportHeight, 0.98, 0.26)
+      : stickyProgress(geometry.research, geometry.researchStage, 72);
+    const distanceScale = lite ? 0.8 : 1;
+    const headerProgress = lite ? viewportProgress(geometry.researchHeader, viewportHeight, 0.94, 0.6) : range(progress, 0.02, 0.22);
+
+    setNumber(research, "--research-progress", progress);
+    setPixels(researchHeader, "--research-header-x", -72 * (1 - headerProgress) * distanceScale);
+    setPixels(researchHeader, "--research-header-y", 38 * (1 - headerProgress) * distanceScale);
+    setNumber(researchHeader, "--research-header-opacity", 0.06 + 0.94 * headerProgress);
+    setNumber(researchHeader, "--research-rule-scale", headerProgress);
+
+    researchItems.forEach((item, index) => {
+      const start = 0.1 + index * 0.11;
+      const end = 0.39 + index * 0.11;
+      const itemProgress = lite ? viewportProgress(geometry.researchItems[index], viewportHeight, 0.96, 0.42) : range(progress, start, end);
+      const direction = index % 2 === 0 ? -1 : 1;
+
+      setNumber(item, "--research-item-progress", itemProgress);
+      setPixels(item, "--research-item-x", direction * 118 * (1 - itemProgress) * distanceScale);
+      setPixels(item, "--research-item-y", 88 * (1 - itemProgress) * distanceScale);
+      setDegrees(item, "--research-item-rotate", direction * -4.2 * (1 - itemProgress) * distanceScale);
+      setNumber(item, "--research-item-scale", 0.78 + 0.22 * itemProgress);
+      setNumber(item, "--research-item-opacity", 0.04 + 0.96 * itemProgress);
+      setPixels(item, "--research-logo-y", 42 * (1 - itemProgress) * distanceScale);
+      setDegrees(item, "--research-logo-rotate", direction * 10 * (1 - itemProgress) * distanceScale);
+      setPixels(item, "--research-label-x", direction * -48 * (1 - itemProgress) * distanceScale);
+      setNumber(item, "--research-divider-scale", lite ? itemProgress : range(progress, start + 0.06, end + 0.08));
+    });
+  };
+
+  const updateAboutScene = (viewportHeight, geometry) => {
+    const { about, aboutHeader, aboutParagraphs, aboutLink } = homeScenes;
+    if (!about) return;
+
+    const lite = liteMotionEnabled();
+    const progress = lite ? viewportProgress(geometry.about, viewportHeight, 0.98, 0.22) : stickyProgress(geometry.about, geometry.aboutStage, 72);
+    const distanceScale = lite ? 0.8 : 1;
+    const headerProgress = lite ? viewportProgress(geometry.aboutHeader, viewportHeight, 0.94, 0.62) : range(progress, 0.02, 0.2);
+    const firstProgress = lite ? viewportProgress(geometry.aboutParagraphs[0], viewportHeight, 0.96, 0.5) : range(progress, 0.14, 0.44);
+    const secondProgress = lite ? viewportProgress(geometry.aboutParagraphs[1], viewportHeight, 0.96, 0.5) : range(progress, 0.4, 0.7);
+    const firstSettle = range(progress, 0.5, 0.72);
+    const firstRestore = range(progress, 0.84, 1);
+    const linkProgress = lite ? viewportProgress(geometry.aboutLink, viewportHeight, 0.96, 0.56) : range(progress, 0.68, 0.9);
+
+    setNumber(about, "--about-progress", progress);
+    setPixels(aboutHeader, "--about-header-x", -76 * (1 - headerProgress) * distanceScale);
+    setNumber(aboutHeader, "--about-header-opacity", 0.05 + 0.95 * headerProgress);
+    setNumber(aboutHeader, "--about-rule-scale", headerProgress);
+
+    if (aboutParagraphs[0]) {
+      setPixels(aboutParagraphs[0], "--about-copy-y", (74 * (1 - firstProgress) - 18 * firstSettle) * distanceScale);
+      setNumber(aboutParagraphs[0], "--about-copy-opacity", clamp(0.06 + 0.94 * firstProgress - 0.3 * firstSettle + 0.15 * firstRestore, 0.06, 1));
+      setPercent(aboutParagraphs[0], "--about-copy-clip", 46 * (1 - firstProgress));
+    }
+
+    if (aboutParagraphs[1]) {
+      setPixels(aboutParagraphs[1], "--about-copy-y", 82 * (1 - secondProgress) * distanceScale);
+      setNumber(aboutParagraphs[1], "--about-copy-opacity", 0.05 + 0.95 * secondProgress);
+      setPercent(aboutParagraphs[1], "--about-copy-clip", 48 * (1 - secondProgress));
+    }
+
+    setPixels(aboutLink, "--about-link-y", 42 * (1 - linkProgress) * distanceScale);
+    setPixels(aboutLink, "--about-link-arrow-x", -20 * (1 - linkProgress) * distanceScale);
+    setNumber(aboutLink, "--about-link-opacity", 0.04 + 0.96 * linkProgress);
+    setNumber(aboutLink, "--about-link-line-scale", linkProgress);
+  };
+
+  const updatePublicationsScene = (viewportHeight, geometry) => {
+    const { publications, publicationsHeader, publicationEntries } = homeScenes;
+    if (!publications) return;
+
+    const sectionProgress = sceneProgress(geometry.publications, viewportHeight, 0.94, 0.08);
+    const headerProgress = range(sectionProgress, 0, 0.18);
+    const distanceScale = liteMotionEnabled() ? 0.68 : 1;
+
+    setNumber(publications, "--publications-progress", sectionProgress);
+    setPixels(publicationsHeader, "--publications-header-y", 54 * (1 - headerProgress) * distanceScale);
+    setNumber(publicationsHeader, "--publications-header-opacity", 0.05 + 0.95 * headerProgress);
+
+    publicationEntries.forEach((entry, index) => {
+      const bounds = geometry.publicationEntries[index];
+      const progress = clamp((viewportHeight * 0.94 - bounds.top) / (viewportHeight * 0.56));
+      const direction = index % 2 === 0 ? -1 : 1;
+      const titleProgress = range(progress, 0.08, 0.55);
+      const metaProgress = range(progress, 0.28, 0.74);
+      const linksProgress = range(progress, 0.5, 0.92);
+
+      setNumber(entry, "--publication-progress", progress);
+      setPixels(entry, "--publication-x", direction * 104 * (1 - progress) * distanceScale);
+      setPixels(entry, "--publication-y", 38 * (1 - progress) * distanceScale);
+      setDegrees(entry, "--publication-rotate", direction * -1.6 * (1 - progress) * distanceScale);
+      setNumber(entry, "--publication-opacity", 0.04 + 0.96 * progress);
+      setNumber(entry, "--publication-line-scale", range(progress, 0.08, 0.48));
+      setPixels(entry, "--publication-title-y", 34 * (1 - titleProgress) * distanceScale);
+      setNumber(entry, "--publication-title-opacity", 0.04 + 0.96 * titleProgress);
+      setPixels(entry, "--publication-meta-y", 28 * (1 - metaProgress) * distanceScale);
+      setNumber(entry, "--publication-meta-opacity", 0.04 + 0.96 * metaProgress);
+      setPixels(entry, "--publication-links-y", 24 * (1 - linksProgress) * distanceScale);
+      setNumber(entry, "--publication-links-opacity", 0.04 + 0.96 * linksProgress);
+    });
+  };
+
+  const updateContactScene = (viewportHeight, geometry) => {
+    const { contact, contactHeader, contactText, contactSocial, contactIcons, contactNote } = homeScenes;
+    if (!contact) return;
+
+    const progress = sceneProgress(geometry.contact, viewportHeight, 0.96, 0.12);
+    const distanceScale = liteMotionEnabled() ? 0.68 : 1;
+    const headerProgress = range(progress, 0.04, 0.32);
+    const textProgress = range(progress, 0.18, 0.55);
+    const socialProgress = range(progress, 0.38, 0.78);
+    const noteProgress = range(progress, 0.66, 0.94);
+
+    setNumber(contact, "--contact-progress", progress);
+    setNumber(contact, "--contact-border-scale", range(progress, 0, 0.2));
+    setPixels(contactHeader, "--contact-header-x", -68 * (1 - headerProgress) * distanceScale);
+    setNumber(contactHeader, "--contact-header-opacity", 0.04 + 0.96 * headerProgress);
+    setPixels(contactText, "--contact-text-y", 74 * (1 - textProgress) * distanceScale);
+    setNumber(contactText, "--contact-text-opacity", 0.04 + 0.96 * textProgress);
+    setPixels(contactSocial, "--contact-social-y", 34 * (1 - socialProgress) * distanceScale);
+    setNumber(contactSocial, "--contact-social-opacity", 0.04 + 0.96 * socialProgress);
+    setPixels(contactNote, "--contact-note-y", 28 * (1 - noteProgress) * distanceScale);
+    setNumber(contactNote, "--contact-note-opacity", 0.04 + 0.96 * noteProgress);
+
+    const center = (contactIcons.length - 1) / 2;
+    contactIcons.forEach((icon, index) => {
+      const iconProgress = range(progress, 0.4 + index * 0.055, 0.7 + index * 0.055);
+      setPixels(icon, "--contact-icon-x", (center - index) * 44 * (1 - iconProgress) * distanceScale);
+      setPixels(icon, "--contact-icon-y", 42 * (1 - iconProgress) * distanceScale);
+      setDegrees(icon, "--contact-icon-rotate", (-14 + index * 5.5) * (1 - iconProgress) * distanceScale);
+      setNumber(icon, "--contact-icon-opacity", 0.04 + 0.96 * iconProgress);
+    });
+  };
+
+  const updateHomeMotion = (viewportWidth, viewportHeight) => {
+    if (!homeScenes) return;
+
+    const geometry = {
+      hero: homeScenes.hero?.getBoundingClientRect(),
+      research: homeScenes.research?.getBoundingClientRect(),
+      about: homeScenes.about?.getBoundingClientRect(),
+      publications: homeScenes.publications?.getBoundingClientRect(),
+      contact: homeScenes.contact?.getBoundingClientRect(),
+    };
+    const updates = {
+      hero: shouldUpdateScene("hero", geometry.hero, viewportHeight),
+      research: shouldUpdateScene("research", geometry.research, viewportHeight),
+      about: shouldUpdateScene("about", geometry.about, viewportHeight),
+      publications: shouldUpdateScene("publications", geometry.publications, viewportHeight),
+      contact: shouldUpdateScene("contact", geometry.contact, viewportHeight),
+    };
+
+    if (updates.hero) {
+      geometry.heroStage = homeScenes.heroStage?.getBoundingClientRect();
+    }
+    if (updates.research) {
+      geometry.researchStage = homeScenes.researchStage?.getBoundingClientRect();
+      geometry.researchHeader = homeScenes.researchHeader?.getBoundingClientRect();
+      geometry.researchItems = homeScenes.researchItems.map((item) => item.getBoundingClientRect());
+    }
+    if (updates.about) {
+      geometry.aboutStage = homeScenes.aboutStage?.getBoundingClientRect();
+      geometry.aboutHeader = homeScenes.aboutHeader?.getBoundingClientRect();
+      geometry.aboutParagraphs = homeScenes.aboutParagraphs.map((paragraph) => paragraph.getBoundingClientRect());
+      geometry.aboutLink = homeScenes.aboutLink?.getBoundingClientRect();
+    }
+    if (updates.publications) {
+      geometry.publicationEntries = homeScenes.publicationEntries.map((entry) => entry.getBoundingClientRect());
+    }
+
+    homeScenes.hero?.classList.toggle("is-motion-near", sceneZone(geometry.hero, viewportHeight) === "near");
+
+    if (updates.hero) updateHeroScene(viewportWidth, viewportHeight, geometry);
+    if (updates.research) updateResearchScene(viewportHeight, geometry);
+    if (updates.about) updateAboutScene(viewportHeight, geometry);
+    if (updates.publications) updatePublicationsScene(viewportHeight, geometry);
+    if (updates.contact) updateContactScene(viewportHeight, geometry);
+  };
+
   const updateAmbientMotion = () => {
     animationFrame = undefined;
     if (!ambientMotionEnabled || document.hidden) return;
 
     const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
     const viewportCenter = viewportHeight / 2;
 
-    if (home) {
-      const hero = home.querySelector(".home-hero");
-      const heroHeight = hero ? hero.offsetHeight : viewportHeight;
-      const heroProgress = clamp(window.scrollY / Math.max(heroHeight, 1), 0, 1);
-      home.style.setProperty("--hero-flow-y", `${(heroProgress * 18).toFixed(2)}px`);
-      home.style.setProperty("--hero-copy-y", `${(heroProgress * -14).toFixed(2)}px`);
-      home.style.setProperty("--hero-portrait-y", `${(heroProgress * 8).toFixed(2)}px`);
+    updateHomeMotion(viewportWidth, viewportHeight);
 
-      parallaxItems.forEach((item, index) => {
-        const speed = Number(item.dataset.parallaxSpeed || 0);
-        const translateY = clamp(window.scrollY * speed, -46, 46);
-        const translateX = translateY * (index % 2 === 0 ? -0.18 : 0.14);
-        const rotation = clamp(translateY * 0.008, -0.32, 0.32);
-        item.style.setProperty("--parallax-x", `${translateX.toFixed(2)}px`);
-        item.style.setProperty("--parallax-y", `${translateY.toFixed(2)}px`);
-        item.style.setProperty("--parallax-rotation", `${rotation.toFixed(3)}deg`);
+    if (!liteMotionEnabled()) {
+      depthItems.forEach(({ element, strength }) => {
+        const bounds = element.getBoundingClientRect();
+        if (bounds.bottom < -120 || bounds.top > viewportHeight + 120) return;
+
+        const elementCenter = bounds.top + bounds.height / 2;
+        const depth = clamp((viewportCenter - elementCenter) / viewportHeight, -1, 1) * strength;
+        element.style.setProperty("--scroll-depth-y", `${(depth * -7).toFixed(2)}px`);
       });
     }
-
-    depthItems.forEach(({ element, strength }) => {
-      const bounds = element.getBoundingClientRect();
-      if (bounds.bottom < -120 || bounds.top > viewportHeight + 120) return;
-
-      const elementCenter = bounds.top + bounds.height / 2;
-      const depth = clamp((viewportCenter - elementCenter) / viewportHeight, -1, 1) * strength;
-      element.style.setProperty("--scroll-depth-y", `${(depth * -7).toFixed(2)}px`);
-    });
   };
 
   const requestAmbientUpdate = () => {
@@ -213,25 +486,22 @@
     }
 
     motionScopes.forEach((scope) => scope.classList.remove("motion-ambient"));
-    if (home) {
-      home.style.removeProperty("--hero-flow-y");
-      home.style.removeProperty("--hero-copy-y");
-      home.style.removeProperty("--hero-portrait-y");
-    }
-    parallaxItems.forEach((item) => {
-      item.style.removeProperty("--parallax-x");
-      item.style.removeProperty("--parallax-y");
-      item.style.removeProperty("--parallax-rotation");
-    });
+    home?.classList.remove("motion-home-active", "motion-home-lite");
+    homeScenes?.hero?.classList.remove("is-motion-near");
+    document.documentElement.classList.remove("home-motion-prepared");
+    homeSceneZones.clear();
     depthItems.forEach(({ element }) => element.style.removeProperty("--scroll-depth-y"));
   };
 
   const configureAmbientMotion = () => {
     stopAmbientMotion();
-    if (reducedMotion.matches || liteMotionEnabled()) return;
+    if (reducedMotion.matches || saveDataEnabled()) return;
 
     ambientMotionEnabled = true;
     motionScopes.forEach((scope) => scope.classList.add("motion-ambient"));
+    home?.classList.add("motion-home-active");
+    home?.classList.toggle("motion-home-lite", liteMotionEnabled());
+    if (home) window.__editorialHomeMotionReady = true;
     updateAmbientMotion();
     window.addEventListener("scroll", requestAmbientUpdate, { passive: true });
     window.addEventListener("resize", requestAmbientUpdate, { passive: true });
@@ -253,14 +523,13 @@
     connection.addEventListener("change", restartMotion);
   }
   document.addEventListener("visibilitychange", handleVisibilityChange);
-  window.addEventListener(
-    "pagehide",
-    () => {
-      disconnectRevealObserver();
-      stopAmbientMotion();
-    },
-    { once: true }
-  );
+  window.addEventListener("pagehide", () => {
+    disconnectRevealObserver();
+    stopAmbientMotion();
+  });
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) restartMotion();
+  });
 
   startReveals();
   configureAmbientMotion();
