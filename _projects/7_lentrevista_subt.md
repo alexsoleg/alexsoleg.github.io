@@ -1,9 +1,9 @@
 ---
 layout: page
-title: L’Entrevista Subt
+title: L’Entrevista
 description: Short film.
 img: assets/img/lentrevista_subt.jpg
-thumbnail_alt: Two suited characters in an office scene from L’Entrevista Subt.
+thumbnail_alt: Two suited characters in an office scene from L’Entrevista.
 importance: 5
 category: fun
 video: true
@@ -16,6 +16,6 @@ video: true
     class="project-video__iframe"
     width="100%"
     height="100%"
-    title="L’Entrevista Subt short film"
+    title="L’Entrevista short film"
   %}
 </div>

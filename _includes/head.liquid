@@ -82,6 +82,14 @@
   <script>
     initTheme();
   </script>
+{% else %}
+  <script>
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.documentElement.setAttribute('data-theme-setting', 'light');
+    window.determineComputedTheme = function () {
+      return 'light';
+    };
+  </script>
 {% endif %}
 
 {% if page.map %}
@@ -103,16 +111,20 @@
     href="{{ site.third_party_libraries.highlightjs.url.css.light }}"
     integrity="{{ site.third_party_libraries.highlightjs.integrity.css.light }}"
     crossorigin="anonymous"
-    media="screen and (prefers-color-scheme: light)"
+    {% if site.enable_darkmode %}
+      media="screen and (prefers-color-scheme: light)"
+    {% endif %}
   >
-  <link
-    defer
-    rel="stylesheet"
-    href="{{ site.third_party_libraries.highlightjs.url.css.dark }}"
-    integrity="{{ site.third_party_libraries.highlightjs.integrity.css.dark }}"
-    crossorigin="anonymous"
-    media="screen and (prefers-color-scheme: dark)"
-  >
+  {% if site.enable_darkmode %}
+    <link
+      defer
+      rel="stylesheet"
+      href="{{ site.third_party_libraries.highlightjs.url.css.dark }}"
+      integrity="{{ site.third_party_libraries.highlightjs.integrity.css.dark }}"
+      crossorigin="anonymous"
+      media="screen and (prefers-color-scheme: dark)"
+    >
+  {% endif %}
   <link
     defer
     rel="stylesheet"

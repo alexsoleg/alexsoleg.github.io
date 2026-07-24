@@ -6,6 +6,7 @@ img: assets/img/cartnet_project_transparent.png
 logo: assets/img/cartnet_project_transparent.png
 thumbnail_alt: CartNet thermal ellipsoid mark.
 redirect: https://imatge-upc.github.io/CartNet/
+github: https://github.com/imatge-upc/CartNet
 importance: 2
 category: academic
 featured: true

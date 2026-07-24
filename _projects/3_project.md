@@ -1,7 +1,7 @@
 ---
 layout: page
 title: MuSE
-description: Hierarchical machine learning for multiscale interactions in molecules and materials.
+description: Hierarchical atomistic learning through soft coarse-graining across multiple spatial scales.
 img: assets/img/muse_logo_alpha.png
 logo: assets/img/muse_logo_alpha.png
 thumbnail_alt: MuSE project logo.
@@ -9,7 +9,6 @@ redirect: https://arxiv.org/abs/2605.25710
 importance: 1
 category: academic
 featured: true
-logo_only: true
 related_publications: true
 ---
 
