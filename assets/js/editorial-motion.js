@@ -24,11 +24,9 @@
         accent: home.querySelector(".home-accent"),
         words: Array.from(home.querySelectorAll(".home-hero__word")),
         research: home.querySelector('[data-scroll-scene="research"]'),
-        researchStage: home.querySelector(".selected-research > .editorial-shell"),
         researchHeader: home.querySelector(".selected-research .editorial-section-header"),
         researchItems: Array.from(home.querySelectorAll(".research-strip > li")),
         about: home.querySelector('[data-scroll-scene="about"]'),
-        aboutStage: home.querySelector(".home-about__stage"),
         aboutHeader: home.querySelector(".home-about .editorial-section-header"),
         aboutParagraphs: Array.from(home.querySelectorAll(".home-about__copy > p")),
         aboutLink: home.querySelector(".home-about .editorial-text-link"),
@@ -171,14 +169,6 @@
     return clamp((viewportHeight * entryPoint - bounds.top) / travel);
   };
 
-  const stickyPreviewProgress = (sceneBounds, stageBounds, viewportHeight, stickyTop, entryPoint = 0.9) => {
-    if (!sceneBounds || !stageBounds) return 1;
-    const previewTop = viewportHeight * entryPoint;
-    const stickyTravel = Math.max(sceneBounds.height - stageBounds.height, 1);
-    const totalTravel = Math.max(previewTop - stickyTop + stickyTravel, 1);
-    return clamp((previewTop - sceneBounds.top) / totalTravel);
-  };
-
   const viewportProgress = (bounds, viewportHeight, entryPoint = 0.94, settlePoint = 0.34) => {
     if (!bounds) return 1;
     return clamp((viewportHeight * entryPoint - bounds.top) / (viewportHeight * (entryPoint - settlePoint)));
@@ -203,11 +193,9 @@
     if (!hero) return;
 
     const bounds = geometry.hero;
-    const stickyTop = narrowViewport.matches ? 64 : 72;
-    const stageHeight = geometry.heroStage?.height || viewportHeight;
     const progress = liteMotionEnabled()
       ? clamp(-bounds.top / Math.max(bounds.height - viewportHeight * 0.38, viewportHeight * 0.62))
-      : clamp((stickyTop - bounds.top) / Math.max(bounds.height - stageHeight, 1));
+      : clamp(-bounds.top / Math.max(bounds.height * 0.74, viewportHeight * 0.58));
     const distanceScale = liteMotionEnabled() ? 0.76 : 1;
 
     setNumber(home, "--hero-progress", progress);
@@ -256,7 +244,7 @@
     const copyExit = range(progress, 0.58, 0.88);
     setPixels(copy, "--copy-x", 36 * copyExit * distanceScale);
     setPixels(copy, "--copy-y", -92 * copyLift * distanceScale);
-    setNumber(copy, "--copy-opacity", 1 - 0.86 * copyExit);
+    setNumber(copy, "--copy-opacity", 1 - 0.72 * copyExit);
 
     const accentStretch = range(progress, 0.18, 0.5);
     const accentExit = range(progress, 0.62, 0.82);
@@ -269,33 +257,31 @@
     if (!research) return;
 
     const lite = liteMotionEnabled();
-    const progress = lite
-      ? viewportProgress(geometry.research, viewportHeight, 0.98, 0.26)
-      : stickyPreviewProgress(geometry.research, geometry.researchStage, viewportHeight, 72);
+    const progress = viewportProgress(geometry.research, viewportHeight, lite ? 1 : 1.04, lite ? 0.26 : 0.22);
     const distanceScale = lite ? 0.8 : 1;
     const headerProgress = lite ? viewportProgress(geometry.researchHeader, viewportHeight, 0.94, 0.6) : range(progress, 0.02, 0.22);
 
     setNumber(research, "--research-progress", progress);
-    setPixels(researchHeader, "--research-header-x", -72 * (1 - headerProgress) * distanceScale);
-    setPixels(researchHeader, "--research-header-y", 38 * (1 - headerProgress) * distanceScale);
-    setNumber(researchHeader, "--research-header-opacity", 0.06 + 0.94 * headerProgress);
+    setPixels(researchHeader, "--research-header-x", -42 * (1 - headerProgress) * distanceScale);
+    setPixels(researchHeader, "--research-header-y", 26 * (1 - headerProgress) * distanceScale);
+    setNumber(researchHeader, "--research-header-opacity", 0.22 + 0.78 * headerProgress);
     setNumber(researchHeader, "--research-rule-scale", headerProgress);
 
     researchItems.forEach((item, index) => {
-      const start = 0.1 + index * 0.11;
-      const end = 0.39 + index * 0.11;
+      const start = 0.08 + index * 0.065;
+      const end = 0.34 + index * 0.075;
       const itemProgress = lite ? viewportProgress(geometry.researchItems[index], viewportHeight, 0.96, 0.42) : range(progress, start, end);
       const direction = index % 2 === 0 ? -1 : 1;
 
       setNumber(item, "--research-item-progress", itemProgress);
-      setPixels(item, "--research-item-x", direction * 118 * (1 - itemProgress) * distanceScale);
-      setPixels(item, "--research-item-y", 88 * (1 - itemProgress) * distanceScale);
-      setDegrees(item, "--research-item-rotate", direction * -4.2 * (1 - itemProgress) * distanceScale);
-      setNumber(item, "--research-item-scale", 0.78 + 0.22 * itemProgress);
-      setNumber(item, "--research-item-opacity", 0.04 + 0.96 * itemProgress);
-      setPixels(item, "--research-logo-y", 42 * (1 - itemProgress) * distanceScale);
-      setDegrees(item, "--research-logo-rotate", direction * 10 * (1 - itemProgress) * distanceScale);
-      setPixels(item, "--research-label-x", direction * -48 * (1 - itemProgress) * distanceScale);
+      setPixels(item, "--research-item-x", direction * 66 * (1 - itemProgress) * distanceScale);
+      setPixels(item, "--research-item-y", 52 * (1 - itemProgress) * distanceScale);
+      setDegrees(item, "--research-item-rotate", direction * -2.4 * (1 - itemProgress) * distanceScale);
+      setNumber(item, "--research-item-scale", 0.9 + 0.1 * itemProgress);
+      setNumber(item, "--research-item-opacity", 0.16 + 0.84 * itemProgress);
+      setPixels(item, "--research-logo-y", 28 * (1 - itemProgress) * distanceScale);
+      setDegrees(item, "--research-logo-rotate", direction * 6 * (1 - itemProgress) * distanceScale);
+      setPixels(item, "--research-label-x", direction * -30 * (1 - itemProgress) * distanceScale);
       setNumber(item, "--research-divider-scale", lite ? itemProgress : range(progress, start + 0.06, end + 0.08));
     });
   };
@@ -305,9 +291,7 @@
     if (!about) return;
 
     const lite = liteMotionEnabled();
-    const progress = lite
-      ? viewportProgress(geometry.about, viewportHeight, 0.98, 0.22)
-      : stickyPreviewProgress(geometry.about, geometry.aboutStage, viewportHeight, 72);
+    const progress = viewportProgress(geometry.about, viewportHeight, lite ? 1 : 1.03, lite ? 0.22 : 0.2);
     const distanceScale = lite ? 0.8 : 1;
     const headerProgress = lite ? viewportProgress(geometry.aboutHeader, viewportHeight, 0.94, 0.62) : range(progress, 0.02, 0.2);
     const firstProgress = lite ? viewportProgress(geometry.aboutParagraphs[0], viewportHeight, 0.96, 0.5) : range(progress, 0.14, 0.44);
@@ -317,25 +301,25 @@
     const linkProgress = lite ? viewportProgress(geometry.aboutLink, viewportHeight, 0.96, 0.56) : range(progress, 0.68, 0.9);
 
     setNumber(about, "--about-progress", progress);
-    setPixels(aboutHeader, "--about-header-x", -76 * (1 - headerProgress) * distanceScale);
-    setNumber(aboutHeader, "--about-header-opacity", 0.05 + 0.95 * headerProgress);
+    setPixels(aboutHeader, "--about-header-x", -44 * (1 - headerProgress) * distanceScale);
+    setNumber(aboutHeader, "--about-header-opacity", 0.2 + 0.8 * headerProgress);
     setNumber(aboutHeader, "--about-rule-scale", headerProgress);
 
     if (aboutParagraphs[0]) {
-      setPixels(aboutParagraphs[0], "--about-copy-y", (74 * (1 - firstProgress) - 18 * firstSettle) * distanceScale);
-      setNumber(aboutParagraphs[0], "--about-copy-opacity", clamp(0.06 + 0.94 * firstProgress - 0.3 * firstSettle + 0.15 * firstRestore, 0.06, 1));
-      setPercent(aboutParagraphs[0], "--about-copy-clip", 46 * (1 - firstProgress));
+      setPixels(aboutParagraphs[0], "--about-copy-y", (52 * (1 - firstProgress) - 14 * firstSettle) * distanceScale);
+      setNumber(aboutParagraphs[0], "--about-copy-opacity", clamp(0.14 + 0.86 * firstProgress - 0.24 * firstSettle + 0.14 * firstRestore, 0.14, 1));
+      setPercent(aboutParagraphs[0], "--about-copy-clip", 34 * (1 - firstProgress));
     }
 
     if (aboutParagraphs[1]) {
-      setPixels(aboutParagraphs[1], "--about-copy-y", 82 * (1 - secondProgress) * distanceScale);
-      setNumber(aboutParagraphs[1], "--about-copy-opacity", 0.05 + 0.95 * secondProgress);
-      setPercent(aboutParagraphs[1], "--about-copy-clip", 48 * (1 - secondProgress));
+      setPixels(aboutParagraphs[1], "--about-copy-y", 58 * (1 - secondProgress) * distanceScale);
+      setNumber(aboutParagraphs[1], "--about-copy-opacity", 0.12 + 0.88 * secondProgress);
+      setPercent(aboutParagraphs[1], "--about-copy-clip", 36 * (1 - secondProgress));
     }
 
-    setPixels(aboutLink, "--about-link-y", 42 * (1 - linkProgress) * distanceScale);
-    setPixels(aboutLink, "--about-link-arrow-x", -20 * (1 - linkProgress) * distanceScale);
-    setNumber(aboutLink, "--about-link-opacity", 0.04 + 0.96 * linkProgress);
+    setPixels(aboutLink, "--about-link-y", 30 * (1 - linkProgress) * distanceScale);
+    setPixels(aboutLink, "--about-link-arrow-x", -14 * (1 - linkProgress) * distanceScale);
+    setNumber(aboutLink, "--about-link-opacity", 0.14 + 0.86 * linkProgress);
     setNumber(aboutLink, "--about-link-line-scale", linkProgress);
   };
 
@@ -343,13 +327,13 @@
     const { publications, publicationsHeader, publicationEntries } = homeScenes;
     if (!publications) return;
 
-    const sectionProgress = sceneProgress(geometry.publications, viewportHeight, 0.94, 0.08);
+    const sectionProgress = sceneProgress(geometry.publications, viewportHeight, 1.03, 0.08);
     const headerProgress = range(sectionProgress, 0, 0.18);
     const distanceScale = liteMotionEnabled() ? 0.68 : 1;
 
     setNumber(publications, "--publications-progress", sectionProgress);
-    setPixels(publicationsHeader, "--publications-header-y", 54 * (1 - headerProgress) * distanceScale);
-    setNumber(publicationsHeader, "--publications-header-opacity", 0.05 + 0.95 * headerProgress);
+    setPixels(publicationsHeader, "--publications-header-y", 38 * (1 - headerProgress) * distanceScale);
+    setNumber(publicationsHeader, "--publications-header-opacity", 0.16 + 0.84 * headerProgress);
 
     publicationEntries.forEach((entry, index) => {
       const bounds = geometry.publicationEntries[index];
@@ -360,10 +344,10 @@
       const linksProgress = range(progress, 0.5, 0.92);
 
       setNumber(entry, "--publication-progress", progress);
-      setPixels(entry, "--publication-x", direction * 104 * (1 - progress) * distanceScale);
-      setPixels(entry, "--publication-y", 38 * (1 - progress) * distanceScale);
-      setDegrees(entry, "--publication-rotate", direction * -1.6 * (1 - progress) * distanceScale);
-      setNumber(entry, "--publication-opacity", 0.04 + 0.96 * progress);
+      setPixels(entry, "--publication-x", direction * 68 * (1 - progress) * distanceScale);
+      setPixels(entry, "--publication-y", 30 * (1 - progress) * distanceScale);
+      setDegrees(entry, "--publication-rotate", direction * -1.1 * (1 - progress) * distanceScale);
+      setNumber(entry, "--publication-opacity", 0.12 + 0.88 * progress);
       setNumber(entry, "--publication-line-scale", range(progress, 0.08, 0.48));
       setPixels(entry, "--publication-title-y", 34 * (1 - titleProgress) * distanceScale);
       setNumber(entry, "--publication-title-opacity", 0.04 + 0.96 * titleProgress);
@@ -378,7 +362,7 @@
     const { contact, contactHeader, contactText, contactSocial, contactIcons, contactNote } = homeScenes;
     if (!contact) return;
 
-    const progress = sceneProgress(geometry.contact, viewportHeight, 0.96, 0.12);
+    const progress = sceneProgress(geometry.contact, viewportHeight, 1.03, 0.12);
     const distanceScale = liteMotionEnabled() ? 0.68 : 1;
     const headerProgress = range(progress, 0.04, 0.32);
     const textProgress = range(progress, 0.18, 0.55);
@@ -388,13 +372,13 @@
     setNumber(contact, "--contact-progress", progress);
     setNumber(contact, "--contact-border-scale", range(progress, 0, 0.2));
     setPixels(contactHeader, "--contact-header-x", -68 * (1 - headerProgress) * distanceScale);
-    setNumber(contactHeader, "--contact-header-opacity", 0.04 + 0.96 * headerProgress);
+    setNumber(contactHeader, "--contact-header-opacity", 0.16 + 0.84 * headerProgress);
     setPixels(contactText, "--contact-text-y", 74 * (1 - textProgress) * distanceScale);
-    setNumber(contactText, "--contact-text-opacity", 0.04 + 0.96 * textProgress);
+    setNumber(contactText, "--contact-text-opacity", 0.14 + 0.86 * textProgress);
     setPixels(contactSocial, "--contact-social-y", 34 * (1 - socialProgress) * distanceScale);
-    setNumber(contactSocial, "--contact-social-opacity", 0.04 + 0.96 * socialProgress);
+    setNumber(contactSocial, "--contact-social-opacity", 0.14 + 0.86 * socialProgress);
     setPixels(contactNote, "--contact-note-y", 28 * (1 - noteProgress) * distanceScale);
-    setNumber(contactNote, "--contact-note-opacity", 0.04 + 0.96 * noteProgress);
+    setNumber(contactNote, "--contact-note-opacity", 0.12 + 0.88 * noteProgress);
 
     const center = (contactIcons.length - 1) / 2;
     contactIcons.forEach((icon, index) => {
@@ -402,7 +386,7 @@
       setPixels(icon, "--contact-icon-x", (center - index) * 44 * (1 - iconProgress) * distanceScale);
       setPixels(icon, "--contact-icon-y", 42 * (1 - iconProgress) * distanceScale);
       setDegrees(icon, "--contact-icon-rotate", (-14 + index * 5.5) * (1 - iconProgress) * distanceScale);
-      setNumber(icon, "--contact-icon-opacity", 0.04 + 0.96 * iconProgress);
+      setNumber(icon, "--contact-icon-opacity", 0.14 + 0.86 * iconProgress);
     });
   };
 
@@ -424,16 +408,11 @@
       contact: shouldUpdateScene("contact", geometry.contact, viewportHeight),
     };
 
-    if (updates.hero) {
-      geometry.heroStage = homeScenes.heroStage?.getBoundingClientRect();
-    }
     if (updates.research) {
-      geometry.researchStage = homeScenes.researchStage?.getBoundingClientRect();
       geometry.researchHeader = homeScenes.researchHeader?.getBoundingClientRect();
       geometry.researchItems = homeScenes.researchItems.map((item) => item.getBoundingClientRect());
     }
     if (updates.about) {
-      geometry.aboutStage = homeScenes.aboutStage?.getBoundingClientRect();
       geometry.aboutHeader = homeScenes.aboutHeader?.getBoundingClientRect();
       geometry.aboutParagraphs = homeScenes.aboutParagraphs.map((paragraph) => paragraph.getBoundingClientRect());
       geometry.aboutLink = homeScenes.aboutLink?.getBoundingClientRect();
