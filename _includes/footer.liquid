@@ -23,8 +23,14 @@
       {% include newsletter.liquid %}
     {% endif %}
 
-    <div class="container">
-      {{ footer_contents }}
+    <div class="container site-footer__inner">
+      <nav class="site-footer__profiles social" aria-label="Profiles and contact">
+        <span class="site-footer__label">Profiles</span>
+        <div class="contact-icons">{% include social.liquid %}</div>
+      </nav>
+      <div class="site-footer__meta">
+        {{ footer_contents }}
+      </div>
     </div>
   </footer>
 {% endif %}

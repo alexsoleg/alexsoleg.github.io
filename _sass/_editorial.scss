@@ -1271,11 +1271,76 @@ html[data-theme="dark"] {
 /* Footer */
 
 footer.sticky-bottom {
-  padding: 2.5rem 0;
+  padding: 2rem 0;
   border-top: 1px solid var(--editorial-line);
   color: var(--editorial-muted);
   background-color: var(--editorial-paper);
   font-size: 0.78rem;
+
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+    align-items: center;
+    gap: 1.5rem 3rem;
+    text-align: left;
+  }
+
+  .site-footer__profiles {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .site-footer__label {
+    color: var(--editorial-coral-text);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .contact-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    font-size: 1.15rem;
+  }
+
+  .contact-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: var(--editorial-ink);
+    transition:
+      border-color 220ms ease,
+      color 220ms ease,
+      background-color 220ms ease,
+      transform 220ms ease;
+
+    i::before {
+      color: currentcolor;
+    }
+
+    &:hover {
+      border-color: rgba(255, 94, 82, 0.35);
+      color: var(--editorial-coral-text);
+      background-color: rgba(255, 94, 82, 0.06);
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+  }
+
+  .site-footer__meta {
+    max-width: 560px;
+    justify-self: end;
+    line-height: 1.55;
+    text-align: right;
+  }
 }
 
 /* About-page scroll narrative */
@@ -2491,6 +2556,29 @@ html.transition *::after {
 
   .cv-section__content .list-groups {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  footer.sticky-bottom {
+    .site-footer__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .site-footer__profiles {
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.45rem;
+      text-align: center;
+    }
+
+    .contact-icons {
+      justify-content: center;
+    }
+
+    .site-footer__meta {
+      justify-self: center;
+      text-align: center;
+    }
   }
 }
 
