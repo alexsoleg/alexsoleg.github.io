@@ -1,7 +1,7 @@
 ---
 layout: page
 title: PRISM
-description: Periodic and multiscale graph modelling for crystal property prediction.
+description: Periodic and multiscale graph modelling for crystal property prediction across atomistic length scales.
 img: assets/img/prism_frontpage_transparent.png
 logo: assets/img/prism_frontpage_transparent.png
 thumbnail_alt: PRISM triangular spectrum mark.

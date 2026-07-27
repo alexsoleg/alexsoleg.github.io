@@ -1,7 +1,7 @@
 ---
 layout: page
 title: River debris detection
-description: Deep learning and Sentinel-2 imagery for floating debris detection in rivers.
+description: Deep learning and Sentinel-2 satellite imagery for floating debris detection across river environments.
 img: assets/img/river_debris_project_transparent.png
 logo: assets/img/river_debris_project_transparent.png
 thumbnail_alt: Blue bottle used for the river debris detection project.
