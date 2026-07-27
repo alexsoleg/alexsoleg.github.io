@@ -193,7 +193,9 @@
     const progress = liteMotionEnabled()
       ? clamp(-bounds.top / Math.max(bounds.height - viewportHeight * 0.38, viewportHeight * 0.62))
       : clamp(-bounds.top / Math.max(bounds.height * 0.74, viewportHeight * 0.58));
-    const distanceScale = liteMotionEnabled() ? 0.76 : 1;
+    const lite = liteMotionEnabled();
+    const distanceScale = lite ? 0.76 : 1;
+    const wordDistanceScale = lite ? 0.24 : 1;
 
     setNumber(home, "--hero-progress", progress);
 
@@ -214,19 +216,19 @@
     const dynamicsIn = range(progress, 0.46, 0.74);
     const dynamicsSettle = range(progress, 0.86, 1);
 
-    setPixels(machineLearning, "--word-x", -viewportWidth * 0.18 * progress * distanceScale);
-    setPixels(machineLearning, "--word-y", lerp(20, -56, progress) * distanceScale);
-    setDegrees(machineLearning, "--word-rotate", lerp(0.8, -0.45, progress) * distanceScale);
+    setPixels(machineLearning, "--word-x", -viewportWidth * 0.18 * progress * wordDistanceScale);
+    setPixels(machineLearning, "--word-y", lerp(20, -56, progress) * wordDistanceScale);
+    setDegrees(machineLearning, "--word-rotate", lerp(0.8, -0.45, progress) * wordDistanceScale);
     setNumber(machineLearning, "--word-opacity", clamp(0.58 + 0.22 * machineIn - 0.18 * machineOut, 0.42, 0.8));
 
-    setPixels(graphs, "--word-x", -viewportWidth * 0.12 * progress * distanceScale);
-    setPixels(graphs, "--word-y", lerp(30, -20, progress) * distanceScale);
-    setDegrees(graphs, "--word-rotate", lerp(-1, 0.6, progress) * distanceScale);
+    setPixels(graphs, "--word-x", -viewportWidth * 0.12 * progress * wordDistanceScale);
+    setPixels(graphs, "--word-y", lerp(30, -20, progress) * wordDistanceScale);
+    setDegrees(graphs, "--word-rotate", lerp(-1, 0.6, progress) * wordDistanceScale);
     setNumber(graphs, "--word-opacity", clamp(0.42 + 0.38 * graphIn - 0.2 * graphOut, 0.38, 0.8));
 
-    setPixels(dynamics, "--word-x", -viewportWidth * 0.08 * progress * distanceScale);
-    setPixels(dynamics, "--word-y", lerp(10, -64, progress) * distanceScale);
-    setDegrees(dynamics, "--word-rotate", lerp(0.9, -0.5, progress) * distanceScale);
+    setPixels(dynamics, "--word-x", -viewportWidth * 0.08 * progress * wordDistanceScale);
+    setPixels(dynamics, "--word-y", lerp(10, -64, progress) * wordDistanceScale);
+    setDegrees(dynamics, "--word-rotate", lerp(0.9, -0.5, progress) * wordDistanceScale);
     setNumber(dynamics, "--word-opacity", clamp(0.42 + 0.38 * dynamicsIn - 0.15 * dynamicsSettle, 0.38, 0.8));
 
     const portraitLift = range(progress, 0.08, 0.6);
