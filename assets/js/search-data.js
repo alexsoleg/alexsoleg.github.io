@@ -49,7 +49,7 @@ ninja.data = [{
               window.location.href = "/projects/1_project/";
             },},{id: "projects-prism",
           title: 'PRISM',
-          description: "Periodic and multiscale graph modelling for crystal property prediction.",
+          description: "Periodic and multiscale graph modelling for crystal property prediction across atomistic length scales.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project/";
             },},{id: "projects-muse",
@@ -69,7 +69,7 @@ ninja.data = [{
               window.location.href = "/projects/5_project/";
             },},{id: "projects-river-debris-detection",
           title: 'River debris detection',
-          description: "Deep learning and Sentinel-2 imagery for floating debris detection in rivers.",
+          description: "Deep learning and Sentinel-2 satellite imagery for floating debris detection across river environments.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/6_project/";
             },},{id: "projects-l-entrevista",
